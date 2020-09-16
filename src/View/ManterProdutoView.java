@@ -48,8 +48,9 @@ public class ManterProdutoView extends javax.swing.JFrame {
         jButtonAlterarProduto = new javax.swing.JButton();
         jButtonExcluirProduto = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Manter Produto");
+        setResizable(false);
 
         jLabel1.setText("Código");
 
@@ -94,6 +95,11 @@ public class ManterProdutoView extends javax.swing.JFrame {
         jButtonAlterarProduto.setText("Alterar");
 
         jButtonExcluirProduto.setText("Excluir");
+        jButtonExcluirProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirProdutoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -122,7 +128,7 @@ public class ManterProdutoView extends javax.swing.JFrame {
                         .addComponent(jTextFieldDescricaoProduto))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 52, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButtonPesquisarProduto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -175,10 +181,11 @@ public class ManterProdutoView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextFieldDescricaoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDescricaoProdutoActionPerformed
@@ -209,6 +216,16 @@ public class ManterProdutoView extends javax.swing.JFrame {
        BuscarProdutoView produto= new BuscarProdutoView();
        produto.setVisible(true);
     }//GEN-LAST:event_jButtonPesquisarProdutoActionPerformed
+
+    private void jButtonExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirProdutoActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButtonExcluirProdutoActionPerformed
 
     /**
      * @param args the command line arguments

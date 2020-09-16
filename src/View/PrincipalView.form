@@ -133,6 +133,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Compra"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenu2ActionPerformed"/>
+          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
@@ -410,15 +413,31 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JButton" name="BotaoVenda">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Venda"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotaoVendaActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="BotaoFinanceiro">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Produto"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="BotaoCompra">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Financeiro"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="BotaoCadastrarProduto">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Caixa"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>

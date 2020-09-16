@@ -146,11 +146,22 @@ public class PrincipalView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        BotaoVenda.setText("Venda");
+        BotaoVenda.setEnabled(false);
         BotaoVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotaoVendaActionPerformed(evt);
             }
         });
+
+        BotaoFinanceiro.setText("Produto");
+        BotaoFinanceiro.setEnabled(false);
+
+        BotaoCompra.setText("Financeiro");
+        BotaoCompra.setEnabled(false);
+
+        BotaoCadastrarProduto.setText("Caixa");
+        BotaoCadastrarProduto.setEnabled(false);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/KS-Logo.png"))); // NOI18N
 
@@ -305,6 +316,11 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jMenu2.setForeground(new java.awt.Color(0, 0, 0));
         jMenu2.setText("Compra");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
 
         jMenuItem1.setText("Compra");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -371,22 +387,22 @@ public class PrincipalView extends javax.swing.JFrame {
     private void jMenuItemFinanceiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFinanceiroActionPerformed
         // TODO add your handling code here:
 
-        //FinanceiroView financeiro = new FinanceiroView();
-       // financeiro.setVisible(true);
+        FinanceiroView financeiro = new FinanceiroView();
+        financeiro.setVisible(true);
 
     }//GEN-LAST:event_jMenuItemFinanceiroActionPerformed
 
     private void jMenuItemCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCaixaActionPerformed
-        // TODO add your handling code here:
-       // CaixaView caixa = new CaixaView();
-       // caixa.setVisible(true);
+        
+       ControleCaixaView caixa = new ControleCaixaView();
+       caixa.setVisible(true);
     }//GEN-LAST:event_jMenuItemCaixaActionPerformed
 
     private void jMenuFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFornecedoresActionPerformed
         // TODO add your handling code here:
 
-        // financeiro = new FornecedorView();
-        //financeiro.setVisible(true); 
+         ManterFornecedorView fornecedor = new ManterFornecedorView();
+         fornecedor.setVisible(true); 
     }//GEN-LAST:event_jMenuFornecedoresActionPerformed
 
     private void jMenuItemFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFuncionarioActionPerformed
@@ -444,6 +460,11 @@ public class PrincipalView extends javax.swing.JFrame {
         // TODO add your handling code here:
         new VendaView().setVisible(true);
     }//GEN-LAST:event_BotaoVendaActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        CompraView compra = new CompraView();
+        compra.setVisible(true);
+    }//GEN-LAST:event_jMenu2ActionPerformed
 
     /**
      * @param args the command line arguments

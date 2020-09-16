@@ -118,16 +118,8 @@ public FornecedorModel() {
 
     @Override
     public String toString() {
-        return "FornecedorModel{" + "codFornecedor=" + codFornecedor + ", email=" + email + ", telefone=" + telefone + ", cnpj=" + cnpj + ", nomeFantasia=" + nomeFantasia + ", compraModelCollection=" + compraModelCollection + '}';
+        return "FornecedorModel{" + "codFornecedor=" + codFornecedor + ", email=" + email + ", telefone=" + telefone + ", cnpj=" + cnpj + ", nomeFantasia=" + nomeFantasia + '}';
     }
-
-
-    
-    
-
-
-
-
 
 }
 

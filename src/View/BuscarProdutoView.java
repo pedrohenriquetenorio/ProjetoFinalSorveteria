@@ -42,6 +42,11 @@ public class BuscarProdutoView extends javax.swing.JFrame {
         jLabel2.setText("Produto");
 
         jButtonBuscarProdutoPesquisar.setText("Pesquisar");
+        jButtonBuscarProdutoPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarProdutoPesquisarActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -92,6 +97,10 @@ public class BuscarProdutoView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonBuscarProdutoPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarProdutoPesquisarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonBuscarProdutoPesquisarActionPerformed
 
     /**
      * @param args the command line arguments

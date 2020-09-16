@@ -45,6 +45,8 @@ public class LoginView extends javax.swing.JFrame {
         jButtonEntrar = new javax.swing.JButton();
         jLoginSenha = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
@@ -88,6 +90,10 @@ public class LoginView extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Login");
 
+        jLabel1.setText("Aviso! Login em desenvolvimento");
+
+        jLabel5.setText("CPF admin, Senha Admin");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -107,13 +113,23 @@ public class LoginView extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jExitLogin)
                                 .addGap(96, 96, 96)
-                                .addComponent(jButtonEntrar)))))
+                                .addComponent(jButtonEntrar))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel1))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel5)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addGap(7, 7, 7)
                 .addComponent(jLabel2)
                 .addGap(24, 24, 24)
                 .addComponent(jLabel3)
@@ -127,7 +143,7 @@ public class LoginView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jExitLogin)
                     .addComponent(jButtonEntrar))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -221,9 +237,11 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.Box.Filler filler1;
     private javax.swing.JButton jButtonEntrar;
     private javax.swing.JButton jExitLogin;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jLoginCPF;
     private javax.swing.JPasswordField jLoginSenha;
     private javax.swing.JPanel jPanel1;

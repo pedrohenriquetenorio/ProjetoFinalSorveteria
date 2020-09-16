@@ -43,7 +43,9 @@ public class CompraView extends javax.swing.JFrame {
         jButtonCompraSalvar = new javax.swing.JButton();
         jButtonCompraAlterar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Compra");
+        setResizable(false);
 
         jLabel1.setText("Produto");
 
@@ -152,10 +154,11 @@ public class CompraView extends javax.swing.JFrame {
                     .addComponent(jButtonCompraExcluir)
                     .addComponent(jButtonCompraSalvar)
                     .addComponent(jButtonCompraAlterar))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextFieldCompraQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCompraQuantidadeActionPerformed

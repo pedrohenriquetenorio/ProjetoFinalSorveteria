@@ -37,7 +37,9 @@ public class ControleCaixaView extends javax.swing.JFrame {
         jButtonFecharCaixa = new javax.swing.JButton();
         jButtonResposavelCaixa = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Controle Caixa");
+        setResizable(false);
 
         jLabel3.setText("Responsável");
 
@@ -46,6 +48,11 @@ public class ControleCaixaView extends javax.swing.JFrame {
         jLabel4.setText("Valor Inicial");
 
         jButtonAbrirCaixa.setText("Abrir");
+        jButtonAbrirCaixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAbrirCaixaActionPerformed(evt);
+            }
+        });
 
         jTableCaixa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -117,11 +124,20 @@ public class ControleCaixaView extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonResposavelCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResposavelCaixaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonResposavelCaixaActionPerformed
+
+    private void jButtonAbrirCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirCaixaActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        
+    }//GEN-LAST:event_jButtonAbrirCaixaActionPerformed
 
     /**
      * @param args the command line arguments

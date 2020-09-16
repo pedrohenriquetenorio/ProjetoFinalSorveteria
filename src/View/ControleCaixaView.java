@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 package View;
+import View.PrincipalView;
+import Model.CaixaModel;
+import Model.DAO.CaixaDAO;
+import static java.lang.Double.parseDouble;
+import java.util.Date;
+import javax.swing.JLabel;
 
 /**
  *
@@ -65,6 +71,11 @@ public class ControleCaixaView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableCaixa);
 
         jButtonFecharCaixa.setText("Fechar Caixa");
+        jButtonFecharCaixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFecharCaixaActionPerformed(evt);
+            }
+        });
 
         jButtonResposavelCaixa.setText("Buscar");
         jButtonResposavelCaixa.addActionListener(new java.awt.event.ActionListener() {
@@ -133,11 +144,29 @@ public class ControleCaixaView extends javax.swing.JFrame {
 
     private void jButtonAbrirCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirCaixaActionPerformed
         // TODO add your handling code here:
+        PrincipalView principalData = new PrincipalView();
+        
+        //CaixaDAO caixaDao = new CaixaDAO();
+        CaixaModel caixaModel = new CaixaModel();
+        // pega o valor inicial do caixa
+        double Double = parseDouble(jTextFieldValorInicialCaixa.getText());
+        caixaModel.setValorInicial(Double); 
+        
+        
         
         
         
         
     }//GEN-LAST:event_jButtonAbrirCaixaActionPerformed
+
+    private void jButtonFecharCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharCaixaActionPerformed
+       CaixaDAO caixaDao = new CaixaDAO();
+        CaixaModel caixaModel = new CaixaModel();
+        
+         double Double = parseDouble(jTextFieldValorInicialCaixa.getText());
+        caixaModel.setValorInicial(Double); 
+        caixaDao.SalvarCaixa(caixaModel);
+    }//GEN-LAST:event_jButtonFecharCaixaActionPerformed
 
     /**
      * @param args the command line arguments

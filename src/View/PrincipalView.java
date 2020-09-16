@@ -6,11 +6,14 @@
 package View;
 
 
+import Model.CaixaModel;
+import static Model.CaixaModel_.dataAbertura;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JLabel;
 import javax.swing.Timer;
 
 /**
@@ -25,6 +28,18 @@ public class PrincipalView extends javax.swing.JFrame {
     public PrincipalView() {
         initComponents();
     }
+    
+    
+    
+    public JLabel getDataRodapePrincipal() {
+        return dataRodapePrincipal;
+    }
+
+    public void setDataRodapePrincipal(JLabel dataRodapePrincipal) {
+        this.dataRodapePrincipal = dataRodapePrincipal;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,7 +53,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         Rodape = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        CaixaStatus = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         HoraRodape = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -87,8 +102,8 @@ public class PrincipalView extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Caixa Status:");
 
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Aberto");
+        CaixaStatus.setForeground(new java.awt.Color(0, 0, 0));
+        CaixaStatus.setText("Aberto");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
@@ -113,7 +128,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(CaixaStatus)
                 .addGap(54, 54, 54)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -140,7 +155,7 @@ public class PrincipalView extends javax.swing.JFrame {
                         .addComponent(dataRodapePrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(NomeRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(RodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
+                            .addComponent(CaixaStatus)
                             .addComponent(jLabel1)
                             .addComponent(jLabel7))))
                 .addContainerGap())
@@ -180,7 +195,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 .addComponent(BotaoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(173, Short.MAX_VALUE)
+                .addContainerGap(170, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(240, 240, 240))
         );
@@ -425,6 +440,8 @@ public class PrincipalView extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
+        CompraView compra = new CompraView();
+        compra.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItemFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFornecedoresActionPerformed
@@ -436,9 +453,11 @@ public class PrincipalView extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // Quando a janela for aberta insere a data e hora no rodapé
         // DATA 
+         CaixaModel caixaModel = new CaixaModel();
          Date datadosistema = new Date();
          SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
          dataRodapePrincipal.setText(formatoData.format(datadosistema));
+         caixaModel.setDataAbertura(datadosistema);
         // HORA 
         Timer timer = new Timer(1000, new hora());
         timer.start();
@@ -498,14 +517,22 @@ public class PrincipalView extends javax.swing.JFrame {
             public void run() {
                 new PrincipalView().setVisible(true);
             }
-        });
+            });
+        
+      
+        
     }
+    
+    
+    
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotaoCadastrarProduto;
     private javax.swing.JButton BotaoCompra;
     private javax.swing.JButton BotaoFinanceiro;
     private javax.swing.JButton BotaoVenda;
+    private javax.swing.JLabel CaixaStatus;
     private javax.swing.JLabel HoraRodape;
     private javax.swing.JLabel NomeRodape;
     private javax.swing.JMenuItem Produto;
@@ -513,7 +540,6 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JLabel dataRodapePrincipal;
     private javax.swing.JMenu jControleCaixa;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -542,7 +568,18 @@ public class PrincipalView extends javax.swing.JFrame {
     public void actionPerformed(ActionEvent e){
     Calendar now = Calendar.getInstance();
     HoraRodape.setText(String.format("%1$tH:%1$tM:%1$tS", now));
+    
+    // 
+//     CaixaModel caixaModel = new CaixaModel();
+//     caixaModel.setDataAbertura((Date) dataAbertura);
+     
+     
+     
+     
      }
+
+    
+        
     }
     
 

@@ -195,7 +195,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 .addComponent(BotaoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(170, Short.MAX_VALUE)
+                .addContainerGap(173, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(240, 240, 240))
         );
@@ -409,7 +409,7 @@ public class PrincipalView extends javax.swing.JFrame {
 
     private void jMenuItemCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCaixaActionPerformed
         
-       ControleCaixaView caixa = new ControleCaixaView();
+       CaixaView caixa = new CaixaView();
        caixa.setVisible(true);
     }//GEN-LAST:event_jMenuItemCaixaActionPerformed
 
@@ -453,11 +453,11 @@ public class PrincipalView extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // Quando a janela for aberta insere a data e hora no rodapé
         // DATA 
-         CaixaModel caixaModel = new CaixaModel();
+        
          Date datadosistema = new Date();
          SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
          dataRodapePrincipal.setText(formatoData.format(datadosistema));
-         caixaModel.setDataAbertura(datadosistema);
+         
         // HORA 
         Timer timer = new Timer(1000, new hora());
         timer.start();

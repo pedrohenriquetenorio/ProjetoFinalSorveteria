@@ -431,7 +431,7 @@ public class VendaView extends javax.swing.JFrame {
         quantidadeDouble = Double.parseDouble(quantidade);
         valorDouble = Double.parseDouble(valor);
         
-        //calcula o total na escolha de quantidades
+//calcula o total na escolha de quantidades
         total = quantidadeDouble * valorDouble ;
         valor = Double.toString(total);
         // atribui valores ao arraylist
@@ -443,16 +443,20 @@ public class VendaView extends javax.swing.JFrame {
         item.addAll(Arrays.asList(itm));
         
         for(int i = 0; i < item.size(); i++){
-            double j = 0;
-            j++;
+          //  double j = 0;
+           // j++;
             valores = Double.parseDouble(item.get(i));
             valorTotalCompra = valorTotalCompra + valores;
-            System.out.println(valorTotalCompra + " indice " + j);
+            //System.out.println(valorTotalCompra + " indice " + j);
          }
         
-            System.out.println(valorTotalCompra);
+        
+        
+        
+        System.out.println(valorTotalCompra);
             
-            String valtotal = String.valueOf(valorTotalCompra);
+        String valtotal = String.valueOf(valorTotalCompra);
+        
         jLabelValorTotal.setText(valtotal);
 //         for(String itens: item){
 //             

@@ -365,7 +365,6 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
              System.out.println(variavel);
          }
          
-        
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     /**

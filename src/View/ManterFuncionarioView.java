@@ -346,6 +346,7 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
         DefaultTableModel val = (DefaultTableModel)jTableFuncionarioTabela.getModel();
         
          FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+         // porque essa merda? 
          FuncionarioModel funcionarioModel = new FuncionarioModel();
          
          variavel = jTableFuncionarioTabela.getSelectedRow();
@@ -362,7 +363,7 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
              // remove linha no banco de dados
              funcionarioDAO.excluirFuncionario(variavel2);
              
-             System.out.println(variavel);
+             //System.out.println(variavel);
          }
          
     }//GEN-LAST:event_jButtonExcluirActionPerformed

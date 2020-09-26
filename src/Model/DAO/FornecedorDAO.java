@@ -32,7 +32,7 @@ public class FornecedorDAO {
             em.close();
             return fornecedor;
         }
-
+        // porque coloquei caixa?????????
         public void atualizar(FornecedorModel caixa) {
 
             EntityManager em = getEm();

@@ -5,7 +5,6 @@
     
     <class>Model.CaixaModel</class>
     <class>Model.CompraModel</class>
-    
     <class>Model.FuncionarioModel</class>
     <class>Model.ProdutoModel</class>
     <class>Model.VendaModel</class>

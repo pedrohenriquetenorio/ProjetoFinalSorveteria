@@ -93,6 +93,11 @@ public class ManterProdutoView extends javax.swing.JFrame {
         });
 
         jButtonAlterarProduto.setText("Alterar");
+        jButtonAlterarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlterarProdutoActionPerformed(evt);
+            }
+        });
 
         jButtonExcluirProduto.setText("Excluir");
         jButtonExcluirProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +133,7 @@ public class ManterProdutoView extends javax.swing.JFrame {
                         .addComponent(jTextFieldDescricaoProduto))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 52, Short.MAX_VALUE))
+                        .addGap(0, 1, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButtonPesquisarProduto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -226,6 +231,10 @@ public class ManterProdutoView extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButtonExcluirProdutoActionPerformed
+
+    private void jButtonAlterarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAlterarProdutoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -10,5 +10,5 @@ package Model;
  * @author pedro
  */
 public class PagamentoModel {
-    // Acho que não vai ser implementado 
+    //
 }

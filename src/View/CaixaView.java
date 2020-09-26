@@ -59,7 +59,8 @@ public class CaixaView extends javax.swing.JFrame {
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Controle de caixa");
 
         jLabel1.setText("Responsável");
 

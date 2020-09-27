@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.NaturalId;
 
 /**
  *
@@ -29,13 +30,13 @@ import javax.xml.bind.annotation.XmlTransient;
 public class FuncionarioModel {
    
 @Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+//@GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column (name = "cod_Funcionario", nullable = false)
 private int codFuncionario;
 
 @Column (name = "cpf", length = 45, nullable = false)
 private String cpf;
-
+@NaturalId
 @Column (name = "nome", length = 45, nullable = false)
 private String nome; 
 

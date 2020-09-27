@@ -9,6 +9,10 @@ package View;
 
 import Model.DAO.FuncionarioDAO;
 import Model.FuncionarioModel;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,10 +21,13 @@ import javax.swing.table.DefaultTableModel;
  * @author pedro
  */
 public class ManterFuncionarioView extends javax.swing.JFrame {
-
+   
+    private List <FuncionarioModel> listaDeFuncionario;
     /**
      * Creates new form ManterFuncionarioView
      */
+    private FuncionarioDAO funcionarioDAO;
+    
     public ManterFuncionarioView() {
         initComponents();
     }
@@ -57,14 +64,18 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jTextFieldFuncionarioEndereco = new javax.swing.JTextField();
         jComboBoxFuncionarioCargo = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
-        jTextFieldCodFuncionario = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
 
         jLabel5.setText("jLabel5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Controle de Funcionário");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("CPF");
 
@@ -87,7 +98,7 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "CPF", "Nome", "Email", "Senha", "Cargo", "Endereço", "Telefone"
+                "ID", "CPF", "Nome", "Email", "Senha", "Cargo", "Endereço", "Telefone"
             }
         ));
         jScrollPane1.setViewportView(jTableFuncionarioTabela);
@@ -140,9 +151,7 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
 
         jComboBoxFuncionarioCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel9.setText("Código Funcionário");
-
-        jTextFieldCodFuncionario.setEnabled(false);
+        jLabel10.setText("Pesquisar Nome");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -160,9 +169,12 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonExcluir))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButtonPesquisar)
+                                .addGap(15, 15, 15)
+                                .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldFuncionarioPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldFuncionarioPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonPesquisar)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,21 +212,11 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addComponent(jScrollPane1)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldCodFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextFieldCodFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldFuncionarioCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
@@ -238,11 +240,12 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jTextFieldFuncionarioEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldFuncionarioPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonPesquisar)
-                    .addComponent(jTextFieldFuncionarioPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -266,7 +269,7 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
@@ -275,8 +278,53 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
 
     private void jTextFieldFuncionarioNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFuncionarioNomeActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextFieldFuncionarioNomeActionPerformed
-
+    private String tabelaDados() {
+        int tamanho = jTableFuncionarioTabela.getRowCount();
+        for (int i = 0; i < tamanho; i++) {
+            String dados = (String) jTableFuncionarioTabela.getValueAt(i, 2);
+                
+                if (dados.equals(jTextFieldFuncionarioPesquisar.getText())) {
+                
+                   
+                return dados;
+                
+            }
+        }
+        return "nenhum dado";
+    }
+    
+    private int linhaPesquisa() {
+        int tamanho = jTableFuncionarioTabela.getRowCount();
+        for (int i = 0; i < tamanho; i++) {
+            String dados = (String) jTableFuncionarioTabela.getValueAt(i, 2);             
+                 if (dados.equals(jTextFieldFuncionarioPesquisar.getText())) {
+                
+                    
+                return i;
+  
+            }
+   
+        }
+        return -1;
+    }
+    private void atualizaTabelaFuncionario(List<FuncionarioModel> funcionarios) {
+        System.out.println("ANTES DO IF");
+        DefaultTableModel val = (DefaultTableModel) jTableFuncionarioTabela.getModel();
+        val.setNumRows(0); // excluir os registros que estão na JTable
+        listaDeFuncionario = funcionarios;
+        System.out.println("ANTES DO IF");
+        if (jTableFuncionarioTabela != null) {
+            System.out.println("DEPOIS DO IF");
+            for (FuncionarioModel funcionario : listaDeFuncionario) {
+                String codigo = Integer.toString(funcionario.getCodFuncionario());
+                val.addRow(new Object[]{codigo, funcionario.getCpf(), funcionario.getNome(), funcionario.getEmail(), funcionario.getSenha(),funcionario.getCargo(), funcionario.getEndereco(), funcionario.getTelefone()});
+            }
+        }
+    }
+    
+    
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
          String cpf, email, endereco, nome, senha, telefone, cargo;
@@ -296,7 +344,7 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
          ObjetoFuncionarioDAO.salvarFuncionario(ObjetoFuncionario);
          
          // Atribui valores vazios 
-         jTextFieldCodFuncionario.setText("");
+        // jTextFieldCodFuncionario.setText("");
          jTextFieldFuncionarioCPF.setText("");
          jTextFieldFuncionarioEmail.setText("");
          jTextFieldFuncionarioEndereco.setText("");
@@ -316,7 +364,7 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
         endereco = ObjetoFuncionario.getTelefone();
         cargo = "Funcionario";
         //adiciona na jTable os valores 
-        val.addRow(new String[] {cpf, nome, email, senha, cargo, endereco});
+        val.addRow(new String[] {codigo, cpf, nome, email, senha, cargo, endereco, telefone});
         
         
     }//GEN-LAST:event_jButtonSalvarActionPerformed
@@ -330,14 +378,61 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldFuncionarioEnderecoActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
+            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+            FuncionarioModel funcionarioModel = new FuncionarioModel();
+        if (!jTextFieldFuncionarioNome.getText().equals("")) {
+            
+            int tamanhoRow = jTableFuncionarioTabela.getRowCount(); 
+            for(int i = 0 ; i<tamanhoRow; i++){   
+                List<FuncionarioModel> funcionario = funcionarioDAO.buscarFuncionario(i);
+                 
+                 System.out.println(funcionario + "TESTANDO");
+  
+                 }
+             // atualizaTabelaFuncionario(funcionario);
+            if (jTextFieldFuncionarioNome == null) {
+                JOptionPane.showMessageDialog(null, "Nenhum registro encontrado.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            } else {               
+                
+                String nome = jTextFieldFuncionarioNome.getText();
+                // Pesquisa todas as linhas e retorna o ID da pesquisa
+              //  String dados = tabelaDados();
+   
+                // buscar o ID do nome, para efeturar a pesquisa no banco pelo ID
+                   // int ID = (int) jTableFuncionarioTabela.getValueAt(linha, 0); 
+                   
+                  
+                // faz uma busca de todos os dados do banco
+                
+                //atualiza tabela antes de buscar 
+                //  atualizaTabelaFuncionario(funcionarios);
+                // String dados = tabelaDados();
+                
+                int linha = linhaPesquisa();
+                // Atualiza Tabela para fazer a busca pela propria tabela
+                //atualizaTabelaFuncionario(listaDeFuncionario);
+                
+                jTableFuncionarioTabela.getValueAt(linha, 2);
+                jTableFuncionarioTabela.setRowSelectionInterval(linha,2);
+                jTextFieldFuncionarioPesquisar.setText("");
+                jTextFieldFuncionarioPesquisar.requestFocus();
+            }
+             } else {
+            JOptionPane.showMessageDialog(null, "Preencha o campo de pesquisa!", "Alerta", JOptionPane.WARNING_MESSAGE);
+            jTextFieldFuncionarioPesquisar.requestFocus();
+            }
+            
+//            public List<Pessoa> findByNome(String nome) {
+//            EntityManager em = getEntityManager();
+//            TypedQuery<Pessoa> query = em.createQuery("Select p FROM Pessoa p WHERE p.nome LIKE :nome", Pessoa.class);
+//            query.setParameter("nome", "%" + nome + "%");
+//            return query.getResultList();
+        
         
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        // TODO add your handling code here:
-        
-        
-        
+       
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
@@ -346,27 +441,54 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
         DefaultTableModel val = (DefaultTableModel)jTableFuncionarioTabela.getModel();
         
          FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-         // porque essa merda? 
+          
          FuncionarioModel funcionarioModel = new FuncionarioModel();
          
          variavel = jTableFuncionarioTabela.getSelectedRow();
          
-         // se retornar -1 quer dizer que esta vazio
+         // se retornar -1 quer dizer que esta vazio, e variavel é o ID 
          if(variavel == -1){
              JOptionPane.showMessageDialog(null, "Selecione um campo na tabela");
          }else{
-             jTextFieldCodFuncionario.setText((String) jTableFuncionarioTabela.getValueAt(variavel, 0));
-             variavel2 = Integer.parseInt(jTextFieldCodFuncionario.getText());
-             
+            
              //remove linha da tabela 
              val.removeRow(jTableFuncionarioTabela.getSelectedRow());
              // remove linha no banco de dados
-             funcionarioDAO.excluirFuncionario(variavel2);
+             funcionarioDAO.excluirFuncionario((int) jTableFuncionarioTabela.getValueAt(variavel, 0));
              
              //System.out.println(variavel);
          }
          
     }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        //FuncionarioDAO a = new FuncionarioDAO();
+        
+        atualizaTabelaFuncionario(funcionarioDAO.findAll());
+////       
+      System.out.println();
+
+            //int i;
+//       FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+//        int tamanhoRow = jTableFuncionarioTabela.getRowCount(); 
+//            System.out.println("ANTES DO FOOOOOOR");
+//            for(i = 0 ; i<10; i++){   
+//               System.out.println("DENTRO DO FOOOOOOR");
+//                List<FuncionarioModel> funcionarios = funcionarioDAO.buscarFuncionario(i);
+//                 atualizaTabelaFuncionario(funcionarios);
+//            }
+//            FuncionarioModel funcionarioModel = new FuncionarioModel();
+//      //      FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+//     //       int tamanhoRow = jTableFuncionarioTabela.getRowCount(); 
+//            for(i = 0 ; i<10; i++){   
+//                
+//                List<FuncionarioModel> funcionario = funcionarioDAO.buscarFuncionario(i);
+//                funcionarioModel = (FuncionarioModel) funcionario; 
+//                 System.out.println(funcionario + "TESTANDO");
+//                 
+//                 }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -410,6 +532,7 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JComboBox<String> jComboBoxFuncionarioCargo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -417,11 +540,9 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableFuncionarioTabela;
-    private javax.swing.JTextField jTextFieldCodFuncionario;
     private javax.swing.JTextField jTextFieldFuncionarioCPF;
     private javax.swing.JTextField jTextFieldFuncionarioEmail;
     private javax.swing.JTextField jTextFieldFuncionarioEndereco;

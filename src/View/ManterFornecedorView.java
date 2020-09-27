@@ -89,11 +89,11 @@ public class ManterFornecedorView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "CNPJ", "Nome", "Email", "Telefone"
+                "CNPJ", "Nome", "Email", "Telefone"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -102,10 +102,8 @@ public class ManterFornecedorView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableFornecedorTabela);
         if (jTableFornecedorTabela.getColumnModel().getColumnCount() > 0) {
-            jTableFornecedorTabela.getColumnModel().getColumn(0).setMinWidth(40);
-            jTableFornecedorTabela.getColumnModel().getColumn(0).setMaxWidth(40);
-            jTableFornecedorTabela.getColumnModel().getColumn(4).setMinWidth(60);
-            jTableFornecedorTabela.getColumnModel().getColumn(4).setMaxWidth(60);
+            jTableFornecedorTabela.getColumnModel().getColumn(3).setMinWidth(60);
+            jTableFornecedorTabela.getColumnModel().getColumn(3).setMaxWidth(60);
         }
 
         jButtonFornecedorPesquisar.setText("Pesquisar");

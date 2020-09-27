@@ -46,6 +46,7 @@ public class FuncionarioDAO {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             
             CriteriaQuery<FuncionarioModel> criteriaQuery = criteriaBuilder.createQuery(FuncionarioModel.class);
+            //criteria.select(criteria.from(EmailDomainTrust.class));
             Root<FuncionarioModel> root = criteriaQuery.from(FuncionarioModel.class);
             
             criteriaQuery.select(root);

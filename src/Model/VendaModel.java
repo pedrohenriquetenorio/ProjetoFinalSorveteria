@@ -40,10 +40,10 @@ public class VendaModel {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column (name = "cod_venda", length = 45, nullable = false)
+    @Column (name = "cod_venda", nullable = false)
     private int codVenda; 
     
-    @Column (name = "valor_total", length = 45, nullable = false)
+    @Column (name = "valor_total", nullable = false)
     private double valorTotal;
     
     
@@ -56,7 +56,7 @@ public class VendaModel {
     private CaixaModel caixa;
             
     @ManyToMany        
-    @JoinTable( name = "venda_itens_produto", 
+    @JoinTable( name = "produto_has_venda", 
                 joinColumns = @JoinColumn(name = "venda_cod_venda"), 
                 inverseJoinColumns = @JoinColumn(name = "produto_cod_produto"))
     private List<ProdutoModel> produtos;

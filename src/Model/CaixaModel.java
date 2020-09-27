@@ -67,14 +67,14 @@ public class CaixaModel implements Serializable{
         
     }
     
-    public CaixaModel(int codCaixa, Date dataAbertura, Date dataFechamento, double valorInicial, double valorTotal, FuncionarioModel funcionario, List<VendaModel> vendas) {
+    public CaixaModel(int codCaixa, Date dataAbertura, Date dataFechamento, double valorInicial, double valorTotal, FuncionarioModel funcionario) {
         this.codCaixa = codCaixa;
         this.dataAbertura = dataAbertura;
         this.dataFechamento = dataFechamento;
         this.valorInicial = valorInicial;
         this.valorTotal = valorTotal;
         this.funcionario = funcionario;
-        this.vendas = vendas;
+       
     }
 
     public int getCodCaixa() {

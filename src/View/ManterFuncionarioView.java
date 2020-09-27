@@ -280,18 +280,42 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jTextFieldFuncionarioNomeActionPerformed
-    private String tabelaDados() {
+    private String tabelaDados(String dados) {
+        
         int tamanho = jTableFuncionarioTabela.getRowCount();
-        for (int i = 0; i < tamanho; i++) {
-            String dados = (String) jTableFuncionarioTabela.getValueAt(i, 2);
+        int i = 0;
+//        for (int i = 0; i < tamanho; i++) {
+//           dados = (String) jTableFuncionarioTabela.getValueAt(i, 2);
+//                
+//                if (dados.equals(jTextFieldFuncionarioPesquisar.getText())) {
+//                        
+//                jTableFuncionarioTabela.getValueAt(i, 2);
+//               
+//                jTableFuncionarioTabela.setRowSelectionInterval(i,2);
+//                
+//                jTextFieldFuncionarioPesquisar.setText("");
+//                
+//                jTextFieldFuncionarioPesquisar.requestFocus();
+//                    
+//                return dados;
+//                
+//            }
+               
                 
-                if (dados.equals(jTextFieldFuncionarioPesquisar.getText())) {
+//        }
+        do{    
+               i++;
+               dados = (String) jTableFuncionarioTabela.getValueAt(i, 2);
+               
+               jTableFuncionarioTabela.getValueAt(i, 2);
+               
+               jTableFuncionarioTabela.setRowSelectionInterval(i,2);
                 
-                   
-                return dados;
+               jTextFieldFuncionarioPesquisar.setText("");
                 
-            }
-        }
+               jTextFieldFuncionarioPesquisar.requestFocus();
+               
+          }while(dados.equals(jTextFieldFuncionarioPesquisar.getText()));  
         return "nenhum dado";
     }
     
@@ -309,18 +333,23 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
         }
         return -1;
     }
+    
     private void atualizaTabelaFuncionario(List<FuncionarioModel> funcionarios) {
         System.out.println("ANTES DO IF");
         DefaultTableModel val = (DefaultTableModel) jTableFuncionarioTabela.getModel();
         val.setNumRows(0); // excluir os registros que estão na JTable
         listaDeFuncionario = funcionarios;
+        
         System.out.println("ANTES DO IF");
+        
         if (jTableFuncionarioTabela != null) {
+            
             System.out.println("DEPOIS DO IF");
+            
             for (FuncionarioModel funcionario : listaDeFuncionario) {
                 String codigo = Integer.toString(funcionario.getCodFuncionario());
                 val.addRow(new Object[]{codigo, funcionario.getCpf(), funcionario.getNome(), funcionario.getEmail(), funcionario.getSenha(),funcionario.getCargo(), funcionario.getEndereco(), funcionario.getTelefone()});
-            }
+           }
         }
     }
     
@@ -346,7 +375,8 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
          // Atribui valores vazios 
         // jTextFieldCodFuncionario.setText("");
          jTextFieldFuncionarioCPF.setText("");
-         jTextFieldFuncionarioEmail.setText("");
+          jTextFieldFuncionarioNome.setText("");
+         jTextFieldFuncionarioEmail.setText(""); 
          jTextFieldFuncionarioEndereco.setText("");
          jTextFieldFuncionarioSenha.setText("");
          jTextFieldFuncionarioTelefone.setText("");
@@ -361,7 +391,7 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
         email = ObjetoFuncionario.getEmail();
         telefone = ObjetoFuncionario.getTelefone();
         senha = ObjetoFuncionario.getSenha();
-        endereco = ObjetoFuncionario.getTelefone();
+        endereco = ObjetoFuncionario.getEndereco();
         cargo = "Funcionario";
         //adiciona na jTable os valores 
         val.addRow(new String[] {codigo, cpf, nome, email, senha, cargo, endereco, telefone});
@@ -380,21 +410,27 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
             FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
             FuncionarioModel funcionarioModel = new FuncionarioModel();
-        if (!jTextFieldFuncionarioNome.getText().equals("")) {
-            
-            int tamanhoRow = jTableFuncionarioTabela.getRowCount(); 
-            for(int i = 0 ; i<tamanhoRow; i++){   
-                List<FuncionarioModel> funcionario = funcionarioDAO.buscarFuncionario(i);
-                 
-                 System.out.println(funcionario + "TESTANDO");
-  
-                 }
-             // atualizaTabelaFuncionario(funcionario);
-            if (jTextFieldFuncionarioNome == null) {
-                JOptionPane.showMessageDialog(null, "Nenhum registro encontrado.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            } else {               
+        if (!jTextFieldFuncionarioPesquisar.getText().equals("")) {
                 
-                String nome = jTextFieldFuncionarioNome.getText();
+                System.out.println("insira um nome");
+            // Colocar uma vaidação aq
+           // int tamanhoRow = jTableFuncionarioTabela.getRowCount(); 
+            
+            // for(int i = 0 ; i<tamanhoRow; i++){   
+                
+              //  List<FuncionarioModel> funcionarios = funcionarioDAO.findAll();
+                 
+                 //System.out.println(funcionario + "TESTANDO");
+  
+               //  }
+               
+              //  atualizaTabelaFuncionario(funcionarios);
+              
+            if (jTextFieldFuncionarioPesquisar == null) {
+                JOptionPane.showMessageDialog(null, "Nenhum registro encontrado.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            } else  {               
+                
+                String nome = jTextFieldFuncionarioPesquisar.getText();
                 // Pesquisa todas as linhas e retorna o ID da pesquisa
               //  String dados = tabelaDados();
    
@@ -407,15 +443,16 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
                 //atualiza tabela antes de buscar 
                 //  atualizaTabelaFuncionario(funcionarios);
                 // String dados = tabelaDados();
+                tabelaDados(nome);
                 
                 int linha = linhaPesquisa();
                 // Atualiza Tabela para fazer a busca pela propria tabela
                 //atualizaTabelaFuncionario(listaDeFuncionario);
                 
-                jTableFuncionarioTabela.getValueAt(linha, 2);
-                jTableFuncionarioTabela.setRowSelectionInterval(linha,2);
-                jTextFieldFuncionarioPesquisar.setText("");
-                jTextFieldFuncionarioPesquisar.requestFocus();
+//                jTableFuncionarioTabela.getValueAt(linha, 2);
+//                jTableFuncionarioTabela.setRowSelectionInterval(linha,2);
+//                jTextFieldFuncionarioPesquisar.setText("");
+//                jTextFieldFuncionarioPesquisar.requestFocus();
             }
              } else {
             JOptionPane.showMessageDialog(null, "Preencha o campo de pesquisa!", "Alerta", JOptionPane.WARNING_MESSAGE);
@@ -459,35 +496,16 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
              //System.out.println(variavel);
          }
          
+         
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-        //FuncionarioDAO a = new FuncionarioDAO();
-        
-        atualizaTabelaFuncionario(funcionarioDAO.findAll());
-////       
-      System.out.println();
-
-            //int i;
-//       FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-//        int tamanhoRow = jTableFuncionarioTabela.getRowCount(); 
-//            System.out.println("ANTES DO FOOOOOOR");
-//            for(i = 0 ; i<10; i++){   
-//               System.out.println("DENTRO DO FOOOOOOR");
-//                List<FuncionarioModel> funcionarios = funcionarioDAO.buscarFuncionario(i);
-//                 atualizaTabelaFuncionario(funcionarios);
-//            }
-//            FuncionarioModel funcionarioModel = new FuncionarioModel();
-//      //      FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-//     //       int tamanhoRow = jTableFuncionarioTabela.getRowCount(); 
-//            for(i = 0 ; i<10; i++){   
-//                
-//                List<FuncionarioModel> funcionario = funcionarioDAO.buscarFuncionario(i);
-//                funcionarioModel = (FuncionarioModel) funcionario; 
-//                 System.out.println(funcionario + "TESTANDO");
-//                 
-//                 }
+        // Preenche a tabela ao iniciar o FuncionarioView
+        FuncionarioDAO a = new FuncionarioDAO();
+        System.out.println("CHAMDA");
+        List<FuncionarioModel> b = a.findAll();
+        atualizaTabelaFuncionario(b);
+        System.out.println(b);
     }//GEN-LAST:event_formWindowOpened
 
     /**

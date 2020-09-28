@@ -129,23 +129,26 @@ public class TestedeTabela extends javax.swing.JFrame {
 //       
       
        // System.out.println(tamanho + "TAMANHO ");
-       
+        
         System.out.println(tamanhoTabela());
        
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private String tamanhoTabela() {
+        String a = jTextFieldPesquisa.getText();
         int tamanho = jTable1.getRowCount();
+        
         for (int i = 0; i < tamanho; i++) {
             String dados = (String) jTable1.getValueAt(i, 2);
-
+            jTable1.setRowSelectionInterval(i, 2);
             if (dados.equals(jTextFieldPesquisa.getText())) {
 
                 return dados;
 
             }
         }
+        
         return "nenhum dado";
     }
     /**

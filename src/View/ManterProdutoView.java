@@ -193,48 +193,41 @@ public class ManterProdutoView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldDescricaoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDescricaoProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldDescricaoProdutoActionPerformed
-
-    private void jButtonSalvarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarProdutoActionPerformed
-        // TODO add your handling code here:
-        ProdutoModel ObjetoProduto = new ProdutoModel();
-        FuncionarioModel funcionario = new FuncionarioModel();
-        
-        //ObjetoProduto.setFuncionario(); // passar um funcionario tipo Funcionario para o Produto
-        ObjetoProduto.setFuncionario(funcionario);
-        ObjetoProduto.setPrecoProduto(jTextFieldPrecoProduto.getText());
-        ObjetoProduto.setQuantidadeProduto(jTextFieldQuantidadeProduto.getText());
-        ObjetoProduto.setTipoProduto(jTextFieldDescricaoProduto.getText());
-        
-        
-        ProdutoDAO ObjetoProdutoDAO = new ProdutoDAO();
-        
-        ObjetoProdutoDAO.salvarProduto(ObjetoProduto);
-        
-        
-    }//GEN-LAST:event_jButtonSalvarProdutoActionPerformed
-
-    private void jButtonPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarProdutoActionPerformed
-        // TODO add your handling code here:
-       BuscarProdutoView produto= new BuscarProdutoView();
-       produto.setVisible(true);
-    }//GEN-LAST:event_jButtonPesquisarProdutoActionPerformed
-
     private void jButtonExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirProdutoActionPerformed
         // TODO add your handling code here:
-        
-        
-        
-        
-        
-        
+
     }//GEN-LAST:event_jButtonExcluirProdutoActionPerformed
 
     private void jButtonAlterarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarProdutoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAlterarProdutoActionPerformed
+
+    private void jButtonSalvarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarProdutoActionPerformed
+        // TODO add your handling code here:
+        ProdutoModel ObjetoProduto = new ProdutoModel();
+        FuncionarioModel funcionario = new FuncionarioModel();
+
+        //ObjetoProduto.setFuncionario(); // passar um funcionario tipo Funcionario para o Produto
+        ObjetoProduto.setFuncionario(funcionario);
+        ObjetoProduto.setPrecoProduto(jTextFieldPrecoProduto.getText());
+        ObjetoProduto.setQuantidadeProduto(jTextFieldQuantidadeProduto.getText());
+        ObjetoProduto.setTipoProduto(jTextFieldDescricaoProduto.getText());
+
+        ProdutoDAO ObjetoProdutoDAO = new ProdutoDAO();
+
+        ObjetoProdutoDAO.salvarProduto(ObjetoProduto);
+
+    }//GEN-LAST:event_jButtonSalvarProdutoActionPerformed
+
+    private void jButtonPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarProdutoActionPerformed
+        // TODO add your handling code here:
+        BuscarProdutoView produto= new BuscarProdutoView();
+        produto.setVisible(true);
+    }//GEN-LAST:event_jButtonPesquisarProdutoActionPerformed
+
+    private void jTextFieldDescricaoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDescricaoProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldDescricaoProdutoActionPerformed
 
     /**
      * @param args the command line arguments

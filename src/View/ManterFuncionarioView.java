@@ -280,59 +280,21 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jTextFieldFuncionarioNomeActionPerformed
-    private String tabelaDados(String dados) {
-        
-        int tamanho = jTableFuncionarioTabela.getRowCount();
-        int i = 0;
+
+//    private int linhaPesquisa() {
+//        int tamanho = jTableFuncionarioTabela.getRowCount();
 //        for (int i = 0; i < tamanho; i++) {
-//           dados = (String) jTableFuncionarioTabela.getValueAt(i, 2);
+//            String dados = (String) jTableFuncionarioTabela.getValueAt(i, 2);             
+//                 if (dados.equals(jTextFieldFuncionarioPesquisar.getText())) {
 //                
-//                if (dados.equals(jTextFieldFuncionarioPesquisar.getText())) {
-//                        
-//                jTableFuncionarioTabela.getValueAt(i, 2);
-//               
-//                jTableFuncionarioTabela.setRowSelectionInterval(i,2);
-//                
-//                jTextFieldFuncionarioPesquisar.setText("");
-//                
-//                jTextFieldFuncionarioPesquisar.requestFocus();
 //                    
-//                return dados;
-//                
+//                return i;
+//  
 //            }
-               
-                
+//   
 //        }
-        do{    
-               i++;
-               dados = (String) jTableFuncionarioTabela.getValueAt(i, 2);
-               
-               jTableFuncionarioTabela.getValueAt(i, 2);
-               
-               jTableFuncionarioTabela.setRowSelectionInterval(i,2);
-                
-               jTextFieldFuncionarioPesquisar.setText("");
-                
-               jTextFieldFuncionarioPesquisar.requestFocus();
-               
-          }while(dados.equals(jTextFieldFuncionarioPesquisar.getText()));  
-        return "nenhum dado";
-    }
-    
-    private int linhaPesquisa() {
-        int tamanho = jTableFuncionarioTabela.getRowCount();
-        for (int i = 0; i < tamanho; i++) {
-            String dados = (String) jTableFuncionarioTabela.getValueAt(i, 2);             
-                 if (dados.equals(jTextFieldFuncionarioPesquisar.getText())) {
-                
-                    
-                return i;
-  
-            }
-   
-        }
-        return -1;
-    }
+//        return -1;
+//    }
     
     private void atualizaTabelaFuncionario(List<FuncionarioModel> funcionarios) {
         System.out.println("ANTES DO IF");
@@ -373,7 +335,7 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
          ObjetoFuncionarioDAO.salvarFuncionario(ObjetoFuncionario);
          
          // Atribui valores vazios 
-        // jTextFieldCodFuncionario.setText("");
+         // jTextFieldCodFuncionario.setText("");
          jTextFieldFuncionarioCPF.setText("");
           jTextFieldFuncionarioNome.setText("");
          jTextFieldFuncionarioEmail.setText(""); 
@@ -408,92 +370,62 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldFuncionarioEnderecoActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
-            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-            FuncionarioModel funcionarioModel = new FuncionarioModel();
-        if (!jTextFieldFuncionarioPesquisar.getText().equals("")) {
-                
-                System.out.println("insira um nome");
-            // Colocar uma vaidação aq
-           // int tamanhoRow = jTableFuncionarioTabela.getRowCount(); 
-            
-            // for(int i = 0 ; i<tamanhoRow; i++){   
-                
-              //  List<FuncionarioModel> funcionarios = funcionarioDAO.findAll();
-                 
-                 //System.out.println(funcionario + "TESTANDO");
-  
-               //  }
-               
-              //  atualizaTabelaFuncionario(funcionarios);
-              
-            if (jTextFieldFuncionarioPesquisar == null) {
-                JOptionPane.showMessageDialog(null, "Nenhum registro encontrado.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            } else  {               
-                
-                String nome = jTextFieldFuncionarioPesquisar.getText();
-                // Pesquisa todas as linhas e retorna o ID da pesquisa
-              //  String dados = tabelaDados();
-   
-                // buscar o ID do nome, para efeturar a pesquisa no banco pelo ID
-                   // int ID = (int) jTableFuncionarioTabela.getValueAt(linha, 0); 
-                   
-                  
-                // faz uma busca de todos os dados do banco
-                
-                //atualiza tabela antes de buscar 
-                //  atualizaTabelaFuncionario(funcionarios);
-                // String dados = tabelaDados();
-                tabelaDados(nome);
-                
-                int linha = linhaPesquisa();
-                // Atualiza Tabela para fazer a busca pela propria tabela
-                //atualizaTabelaFuncionario(listaDeFuncionario);
-                
-//                jTableFuncionarioTabela.getValueAt(linha, 2);
-//                jTableFuncionarioTabela.setRowSelectionInterval(linha,2);
-//                jTextFieldFuncionarioPesquisar.setText("");
-//                jTextFieldFuncionarioPesquisar.requestFocus();
-            }
-             } else {
-            JOptionPane.showMessageDialog(null, "Preencha o campo de pesquisa!", "Alerta", JOptionPane.WARNING_MESSAGE);
-            jTextFieldFuncionarioPesquisar.requestFocus();
-            }
-            
-//            public List<Pessoa> findByNome(String nome) {
-//            EntityManager em = getEntityManager();
-//            TypedQuery<Pessoa> query = em.createQuery("Select p FROM Pessoa p WHERE p.nome LIKE :nome", Pessoa.class);
-//            query.setParameter("nome", "%" + nome + "%");
-//            return query.getResultList();
-        
-        
-    }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
+               tabelaDados();
+
+    }//GEN-LAST:event_jButtonPesquisarActionPerformed
+    
+    private String tabelaDados() {
+        int tamanhos = jTableFuncionarioTabela.getRowCount();
+        int i;
+    
+        //String dado = jTextFieldFuncionarioPesquisar.getText();
+        for (i = 0; i < tamanhos; i++) {
+            
+            String a = (String) jTableFuncionarioTabela.getValueAt(i, 2);
+            jTableFuncionarioTabela.setRowSelectionInterval(i,i);
+            if (a.equals(jTextFieldFuncionarioPesquisar.getText())) {
+
+                return a;
+
+            }
+        }
+            
+            return "nenhum dado";
+    }
+    
+    
+    
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-       
+      
+        
+        
+        
+        
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+         int valorInteiro;
+         int variavel;
+         DefaultTableModel val = (DefaultTableModel)jTableFuncionarioTabela.getModel();
         
-         int variavel, variavel2;
-        DefaultTableModel val = (DefaultTableModel)jTableFuncionarioTabela.getModel();
-        
-         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-          
-         FuncionarioModel funcionarioModel = new FuncionarioModel();
-         
+         FuncionarioDAO excluirFuncionarioDAO = new FuncionarioDAO();
+       
          variavel = jTableFuncionarioTabela.getSelectedRow();
-         
+         // pega o conteudo 
+         String a = (String) jTableFuncionarioTabela.getValueAt(variavel, 0);
+
          // se retornar -1 quer dizer que esta vazio, e variavel é o ID 
          if(variavel == -1){
              JOptionPane.showMessageDialog(null, "Selecione um campo na tabela");
          }else{
-            
-             //remove linha da tabela 
+            valorInteiro = Integer.valueOf(a);
+             //Remove linha da Tabela 
              val.removeRow(jTableFuncionarioTabela.getSelectedRow());
-             // remove linha no banco de dados
-             funcionarioDAO.excluirFuncionario((int) jTableFuncionarioTabela.getValueAt(variavel, 0));
+             //Remove linha do Banco
+             excluirFuncionarioDAO.excluirFuncionario(valorInteiro);
              
-             //System.out.println(variavel);
+           
          }
          
          

@@ -5,10 +5,13 @@
  */
 package Model.DAO;
 
+import Model.FuncionarioModel;
 import Model.ProdutoModel;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaQuery;
 
 /**
  *
@@ -64,6 +67,15 @@ public class ProdutoDAO {
        
     return recebe;  
     }
-      
+     // Busca por varios produtos  
+    public List<ProdutoModel> findAll() {
+        
+            EntityManager em = getEm();
+            CriteriaQuery criteriaQuery = em.getCriteriaBuilder().createQuery();
+            criteriaQuery.select(criteriaQuery.from(ProdutoModel.class)); 
+            return em.createQuery(criteriaQuery).getResultList();
+    
+        }
+    
 }
 

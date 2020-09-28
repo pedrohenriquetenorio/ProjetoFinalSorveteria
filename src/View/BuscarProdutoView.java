@@ -5,12 +5,20 @@
  */
 package View;
 
+import Model.DAO.FuncionarioDAO;
+import Model.DAO.ProdutoDAO;
+import Model.FuncionarioModel;
+import Model.ProdutoModel;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author pedro
  */
 public class BuscarProdutoView extends javax.swing.JFrame {
-
+ private List <ProdutoModel> listaDeProduto;
     /**
      * Creates new form BuscarProdutoView
      */
@@ -32,12 +40,18 @@ public class BuscarProdutoView extends javax.swing.JFrame {
         jTextFieldBuscarProduto = new javax.swing.JTextField();
         jButtonBuscarProdutoPesquisar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTableBuscarProduto = new javax.swing.JTable();
         jButtonSelecionarProduto = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Buscar Produto");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel2.setText("Produto");
 
@@ -48,7 +62,7 @@ public class BuscarProdutoView extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableBuscarProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -56,7 +70,7 @@ public class BuscarProdutoView extends javax.swing.JFrame {
                 "Código", "Tipo", "Preço", "Quantidade"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTableBuscarProduto);
 
         jButtonSelecionarProduto.setText("Selecionar");
 
@@ -102,6 +116,37 @@ public class BuscarProdutoView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonBuscarProdutoPesquisarActionPerformed
 
+     private void atualizaTabelaProduto(List<ProdutoModel> produtos) {
+        System.out.println("ANTES DO IF");
+        DefaultTableModel val = (DefaultTableModel) jTableBuscarProduto.getModel();
+        val.setNumRows(0); // excluir os registros que estão na JTable
+        listaDeProduto = produtos;
+        
+        System.out.println("ANTES DO IF");
+        
+        if (jTableBuscarProduto != null) {
+            
+            System.out.println("DEPOIS DO IF");
+            
+            for (ProdutoModel produto : listaDeProduto) {
+                String codigo = Integer.toString(produto.getCodProduto());
+                val.addRow(new Object[]{codigo, produto.getTipoProduto(),produto.getPrecoProduto(), produto.getQuantidadeProduto()});
+           }
+        }else{
+            JOptionPane.showMessageDialog(null, "Nenhum item na base de dados!");
+        }
+    }
+     
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        ProdutoDAO a = new ProdutoDAO();
+        System.out.println("CHAMDA");
+        List<ProdutoModel> b = a.findAll();
+        atualizaTabelaProduto(b);
+        
+        System.out.println(b);
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -143,7 +188,7 @@ public class BuscarProdutoView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTableBuscarProduto;
     private javax.swing.JTextField jTextFieldBuscarProduto;
     // End of variables declaration//GEN-END:variables
 }

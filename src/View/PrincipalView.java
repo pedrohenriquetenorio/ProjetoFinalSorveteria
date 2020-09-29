@@ -6,8 +6,6 @@
 package View;
 
 
-import Model.CaixaModel;
-import static Model.CaixaModel_.dataAbertura;
 import Model.FuncionarioModel;
 import Model.PrincipalModel;
 import java.awt.event.ActionEvent;
@@ -15,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import javax.swing.JLabel;
+
 import javax.swing.Timer;
 
 /**
@@ -23,7 +21,7 @@ import javax.swing.Timer;
  * @author pedro
  */
 public class PrincipalView extends javax.swing.JFrame {
-    private String value; 
+    private LoginView value; 
     /**
      * Creates new form PrincipalView
      */
@@ -33,23 +31,19 @@ public class PrincipalView extends javax.swing.JFrame {
     
     
     
-    public PrincipalView(String value) {
-        this.value = value;
+    
+    public void PrincipalNomeRodape(String nome) {
+        
+        PrincipalModel a = new PrincipalModel();
+        
+        a.setNomefuncionario(nome);
+        System.out.println(nome);
+       // NomeRodape.setText(a.getNomefuncionario());
+       
+        
     }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
     
     
-    
-    
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -463,13 +457,30 @@ public class PrincipalView extends javax.swing.JFrame {
         // Quando a janela for aberta insere a data e hora no rodapé
         // DATA 
        // FuncionarioModel p = new FuncionarioModel();
-        PrincipalView a = new PrincipalView();
+       //String NomeRodape;
+       PrincipalModel nomeRodape = new PrincipalModel();
         
-        String nomeRodape = a.getValue();
+      //  String nomeRodape = a.getValue();
+        
+      
+        if(nomeRodape.getNomefuncionario() == null){
+        
+            NomeRodape.setText("Funcionario");
+        
+        }else{
+            
+            NomeRodape.setText(nomeRodape.getNomefuncionario());
+        
+        }
+        
+      //  System.out.println(PrincipalNomeRodape(nome));
+        System.out.println("AAAAAAAADADW" +  nomeRodape.getNomefuncionario());
         
         
-        NomeRodape.setText(nomeRodape);
-        
+        FuncionarioModel funcionario = new FuncionarioModel();
+       // NomeRodape.setText(nomeRodape);
+        System.out.println(funcionario);
+    //    NomeRodape.setText(funcionario.getNome());
          Date datadosistema = new Date();
          SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
          dataRodapePrincipal.setText(formatoData.format(datadosistema));
@@ -480,6 +491,9 @@ public class PrincipalView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_formWindowOpened
 
+    
+    
+    
     private void jMenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSairActionPerformed
         // TODO add your handling code here:
         new LoginView().setVisible(true);

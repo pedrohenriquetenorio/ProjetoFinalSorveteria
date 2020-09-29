@@ -5,18 +5,47 @@
  */
 package Model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 /**
  *
  * @author pedro
  */
+@Table (name = "login")
+@Entity 
 public class LoginModel {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "id_login", nullable = false)    
+    private int idLogin;
+    
+    @Column (name = "nome_login", length = 40, nullable = false)
     private String nomeLogin;
+    @OneToOne
+    @JoinColumn(name = "funcionario_cod_funcionario")
+    private FuncionarioModel funcionario;
 
     public LoginModel() {
     }
 
-    public LoginModel(String nomeLogin) {
+    public LoginModel(int idLogin, String nomeLogin) {
+        this.idLogin = idLogin;
         this.nomeLogin = nomeLogin;
+    }
+
+    public int getIdLogin() {
+        return idLogin;
+    }
+
+    public void setIdLogin(int idLogin) {
+        this.idLogin = idLogin;
     }
 
     public String getNomeLogin() {
@@ -29,7 +58,7 @@ public class LoginModel {
 
     @Override
     public String toString() {
-        return "LoginModel{" + "nomeLogin=" + nomeLogin + '}';
+        return "LoginModel{" + "idLogin=" + idLogin + ", nomeLogin=" + nomeLogin + '}';
     }
     
     

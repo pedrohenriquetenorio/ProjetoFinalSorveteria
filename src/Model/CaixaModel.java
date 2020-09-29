@@ -54,6 +54,9 @@ public class CaixaModel implements Serializable{
     @Column(name = "valor_total", length = 45, nullable = false)
     private double valorTotal;
     
+    @Column(name = "estado_caixa")
+    private String estado;
+    
     //Caixa -> Funcionario    
     @ManyToOne
     @JoinColumn(name="funcionario_cod_funcionario")
@@ -66,15 +69,16 @@ public class CaixaModel implements Serializable{
     public CaixaModel() {
         
     }
-    
-    public CaixaModel(int codCaixa, Date dataAbertura, Date dataFechamento, double valorInicial, double valorTotal, FuncionarioModel funcionario) {
+
+    public CaixaModel(int codCaixa, Date dataAbertura, Date dataFechamento, double valorInicial, double valorTotal, String estado, FuncionarioModel funcionario, List<VendaModel> vendas) {
         this.codCaixa = codCaixa;
         this.dataAbertura = dataAbertura;
         this.dataFechamento = dataFechamento;
         this.valorInicial = valorInicial;
         this.valorTotal = valorTotal;
+        this.estado = estado;
         this.funcionario = funcionario;
-       
+        this.vendas = vendas;
     }
 
     public int getCodCaixa() {
@@ -117,6 +121,14 @@ public class CaixaModel implements Serializable{
         this.valorTotal = valorTotal;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     public FuncionarioModel getFuncionario() {
         return funcionario;
     }
@@ -135,8 +147,12 @@ public class CaixaModel implements Serializable{
 
     @Override
     public String toString() {
-        return "CaixaModel{" + "codCaixa=" + codCaixa + ", dataAbertura=" + dataAbertura + ", dataFechamento=" + dataFechamento + ", valorInicial=" + valorInicial + ", valorTotal=" + valorTotal + ", funcionario=" + funcionario + ", vendas=" + vendas + '}';
+        return "CaixaModel{" + "codCaixa=" + codCaixa + ", dataAbertura=" + dataAbertura + ", dataFechamento=" + dataFechamento + ", valorInicial=" + valorInicial + ", valorTotal=" + valorTotal + ", estado=" + estado + ", funcionario=" + funcionario + ", vendas=" + vendas + '}';
     }
+    
+   
+
+    
     
     
     

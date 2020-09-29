@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlTransient;
 import org.hibernate.annotations.NaturalId;
@@ -55,6 +56,7 @@ private String senha;
 @Column (name = "cargo", length = 45, nullable = false)
 private String cargo;
 
+
 //Funcionario -> Compra
 @OneToMany(mappedBy = "funcionario")
 private List<CompraModel> compras;
@@ -67,11 +69,16 @@ private List<CaixaModel> caixas;
 @OneToMany(mappedBy = "funcionario")
 private List<ProdutoModel> produtos;
 
+//Funcionario 
+@OneToOne(mappedBy = "funcionario")
+private LoginModel login;
+
+
 public FuncionarioModel() {
 
 }
 
-    public FuncionarioModel(int codFuncionario, String cpf, String nome, String endereco, String email, String telefone, String senha, String cargo, List<CompraModel> compras, List<CaixaModel> caixas, List<ProdutoModel> produtos) {
+    public FuncionarioModel(int codFuncionario, String cpf, String nome, String endereco, String email, String telefone, String senha, String cargo, List<CompraModel> compras, List<CaixaModel> caixas, List<ProdutoModel> produtos, LoginModel login) {
         this.codFuncionario = codFuncionario;
         this.cpf = cpf;
         this.nome = nome;
@@ -83,6 +90,7 @@ public FuncionarioModel() {
         this.compras = compras;
         this.caixas = caixas;
         this.produtos = produtos;
+        this.login = login;
     }
 
     public int getCodFuncionario() {
@@ -173,18 +181,22 @@ public FuncionarioModel() {
         this.produtos = produtos;
     }
 
-    @Override
-    public String toString() {
-        return "FuncionarioModel{" + "codFuncionario=" + codFuncionario + ", cpf=" + cpf + ", nome=" + nome + ", endereco=" + endereco + ", email=" + email + ", telefone=" + telefone + ", senha=" + senha + ", cargo=" + cargo + ", compras=" + compras + ", caixas=" + caixas + ", produtos=" + produtos + '}';
+    public LoginModel getLogin() {
+        return login;
     }
 
+    public void setLogin(LoginModel login) {
+        this.login = login;
+    }
+
+    @Override
+    public String toString() {
+        return "FuncionarioModel{" + "codFuncionario=" + codFuncionario + ", cpf=" + cpf + ", nome=" + nome + ", endereco=" + endereco + ", email=" + email + ", telefone=" + telefone + ", senha=" + senha + ", cargo=" + cargo + ", compras=" + compras + ", caixas=" + caixas + ", produtos=" + produtos + ", login=" + login + '}';
+    }
+    
     public boolean contains(String text) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    
-
-
 
 
 }

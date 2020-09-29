@@ -6,6 +6,7 @@
 package View;
 
 import Model.DAO.FuncionarioDAO;
+import Model.DAO.LoginDAO;
 import Model.FuncionarioModel;
 import Model.LoginModel;
 import Model.PrincipalModel;
@@ -50,8 +51,6 @@ private List <FuncionarioModel> listaDeFuncionario;
         jButtonEntrar = new javax.swing.JButton();
         jLoginSenha = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
@@ -95,10 +94,6 @@ private List <FuncionarioModel> listaDeFuncionario;
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Login");
 
-        jLabel1.setText("Aviso! Login em desenvolvimento");
-
-        jLabel5.setText("CPF admin, Senha Admin");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -118,23 +113,13 @@ private List <FuncionarioModel> listaDeFuncionario;
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jExitLogin)
                                 .addGap(96, 96, 96)
-                                .addComponent(jButtonEntrar))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel1))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jLabel5)))
+                                .addComponent(jButtonEntrar)))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addGap(7, 7, 7)
+                .addGap(51, 51, 51)
                 .addComponent(jLabel2)
                 .addGap(24, 24, 24)
                 .addComponent(jLabel3)
@@ -177,12 +162,12 @@ private List <FuncionarioModel> listaDeFuncionario;
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
         // Buscar Administrador no banco 
         int i = 0, cpfInt = 0, cpfINt = 0;
-        String nome;
+        String nome, cpf;
         PrincipalView principal = new PrincipalView();
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         FuncionarioModel funcionarioModel = new FuncionarioModel();
-        LoginModel nomeLogin = new LoginModel();
-
+        LoginModel loginModel = new LoginModel();
+        LoginDAO loginDAO = new LoginDAO();
         List<FuncionarioModel> funcionarios = funcionarioDAO.findAll();
         
         listaDeFuncionario = funcionarios;
@@ -194,20 +179,29 @@ private List <FuncionarioModel> listaDeFuncionario;
                // System.out.println(val);
                 
                 funcionarioModel = val;
-
-                String cpf = funcionarioModel.getCpf();
-                 nome = funcionarioModel.getNome();
+                
+                cpf = funcionarioModel.getCpf();
+                nome = funcionarioModel.getNome();
                 cpfInt = Integer.parseInt(cpf);
                 cpfINt = Integer.parseInt (jLoginCPF.getText());
                 
                 }while(cpfInt != cpfINt);
-                
+        
+                System.out.println("Dentro de Login" + nome);
+                funcionarioModel.setNome(nome);
                // Verificação System.out.println("CPF String"  + "CPF INT" + cpfInt + " CPF LOGIN" + cpfINt );
-              nomeLogin.setNomeLogin(nome);
-              principal.setValue(nome);
-              new PrincipalView().setVisible(true);
-        
-        
+               // nomeLogin.setNomeLogin(nome);
+                principal.PrincipalNomeRodape(nome);
+               
+                //principal.setValue(nome);
+                new PrincipalView().setVisible(true);
+                // tem que arrumar esta passand cpf e não o nome, esta como nome la no model
+                
+                loginModel.setNomeLogin(cpf);
+                loginDAO.salvarLogin(loginModel);
+                
+                
+                 
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     private void jLoginCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoginCPFActionPerformed
@@ -262,11 +256,9 @@ private List <FuncionarioModel> listaDeFuncionario;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JButton jButtonEntrar;
     private javax.swing.JButton jExitLogin;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jLoginCPF;
     private javax.swing.JPasswordField jLoginSenha;
     private javax.swing.JPanel jPanel1;

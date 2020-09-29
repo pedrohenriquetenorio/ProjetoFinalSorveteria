@@ -8,6 +8,8 @@ package View;
 import Model.CaixaModel;
 import Model.DAO.CaixaDAO;
 import Model.DAO.FuncionarioDAO;
+import Model.DAO.LoginDAO;
+import Model.LoginModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -73,7 +75,7 @@ public class CaixaView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Responsável", "Data Abertura", "Data fechamento", "Valor Inicial", "Valor Total"
+                "Responsável", "Data Abertura", "Data fechamento", "Valor Inicial", "Valor Total", "Estado Caixa"
             }
         ));
         jScrollPane1.setViewportView(jTableTabelaCaixa);
@@ -105,31 +107,30 @@ public class CaixaView extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonFecharCaixa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextFieldDataFechamento, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldValorInicialCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonAbrirCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextFieldDataFechamento, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 173, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldValorInicialCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonAbrirCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,8 +141,8 @@ public class CaixaView extends javax.swing.JFrame {
                     .addComponent(jTextFieldValorInicialCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonAbrirCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTextFieldValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -177,68 +178,95 @@ public class CaixaView extends javax.swing.JFrame {
 
     private void jButtonAbrirCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirCaixaActionPerformed
         // pega a data
-        String Responsavel, dataA, dataF, valorI, valorT;
+        String Responsavel, dataA, dataF, valorI, valorT, estado;
         CaixaModel caixaModel = new CaixaModel();
+        CaixaDAO caixaDAO = new CaixaDAO();
+        LoginModel loginModel = new LoginModel();
+        LoginDAO loginDAO = new LoginDAO();
         
-         Date data = new Date(System.currentTimeMillis());
-         SimpleDateFormat formatarDate = new SimpleDateFormat("dd/MM/yyyy");
-         String date = formatarDate.format(data);
-         System.out.print(formatarDate.format(data));
-         caixaModel.setDataAbertura(data);
-         caixaModel.setDataFechamento(data); /// Mesma data 
-         
-         int valorInicial = Integer.parseInt(jTextFieldValorInicialCaixa.getText());
-         caixaModel.setValorInicial(valorInicial);
-
-         caixaModel.setValorTotal(0);
-         
-     //    jTextFieldResponsavelCaixa.setText("");
-         jTextFieldValorInicialCaixa.setText("");
-         
-//         jTextFieldResponsavelCaixa.requestFocus();
-         //dataRodapePrincipal.setText(formatoData.format(datadosistema));
-         DefaultTableModel val = (DefaultTableModel)jTableTabelaCaixa.getModel();
-         
-            Responsavel = "Funcionario"; // valor temporario
-               dataA = Double.toString(caixaModel.getValorInicial());
-               dataF = Double.toString(caixaModel.getValorTotal());
-               valorI = date;
-               valorT = date;   
-         val.addRow(new String[] {Responsavel, dataA, dataF, valorI, valorT});
+        // Atribui valores ao CaixaMODEL - DATA, VALOR, ESTADO, RESPOSAVEL!
         
+        Date data = new Date(System.currentTimeMillis());
+        SimpleDateFormat formatarDate = new SimpleDateFormat("dd/MM/yyyy");
+        String date = formatarDate.format(data);
+        
+//        checagem da data
+//        System.out.print(formatarDate.format(data));
+        
+        caixaModel.setDataAbertura(data);
+        caixaModel.setDataFechamento(data); /// Mesma data 
+        
+        int valorInicial = Integer.parseInt(jTextFieldValorInicialCaixa.getText());
+        
+        caixaModel.setValorInicial(valorInicial);
+        
+        caixaModel.setValorTotal(0);
+        
+        caixaModel.setEstado("Aberto");
+        
+        //String a = loginDAO.buscarLogin();
+        //SALVA CAIXA NO BANCO
+        caixaDAO.SalvarCaixa(caixaModel);
+        
+        
+        
+        //LIMPA O VALOR INICIAL
+        jTextFieldValorInicialCaixa.setText("");
+        
+        
+        
+        //ATRIBUI VALORES (OBJETO) NA TABELA
+        DefaultTableModel val = (DefaultTableModel) jTableTabelaCaixa.getModel();
+        
+        
+        
+        Responsavel = "Funcionario"; // valor temporario
+        dataA = Double.toString(caixaModel.getValorInicial());
+        dataF = Double.toString(caixaModel.getValorTotal());
+        valorI = date;
+        valorT = date;
+        estado = "Aberto";
+        val.addRow(new String[]{Responsavel, dataA, dataF, valorI, valorT, estado});
+      
     }//GEN-LAST:event_jButtonAbrirCaixaActionPerformed
 
     private void jButtonFecharCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharCaixaActionPerformed
         int valorInicial, valorTotal;
-        CaixaDAO caixaDao = new CaixaDAO();
+        CaixaDAO caixaDAO = new CaixaDAO();
         CaixaModel caixaModel = new CaixaModel();
         
-         Date data = new Date(System.currentTimeMillis());
-         SimpleDateFormat formatarDate = new SimpleDateFormat("dd/MM/yyyy");
-         String date = formatarDate.format(data);
-        // System.out.print(formatarDate.format(data));
-         caixaModel.setDataAbertura(data);
-         caixaModel.setDataFechamento(data); /// Mesma data 
-         
-         valorInicial = Integer.parseInt(jTextFieldValorInicialCaixa.getText());
-         caixaModel.setValorInicial(valorInicial);
-         
-         valorTotal = Integer.parseInt(jTextFieldValorInicialCaixa.getText());
-         caixaModel.setValorTotal(valorTotal);
-         
-         valorTotal = valorTotal + valorInicial;
-         
-         caixaModel.setValorTotal(valorTotal);
-         
-         jTextFieldDataFechamento.setText("");
-     //    jTextFieldResponsavelCaixa.setText("");
-         jTextFieldValorInicialCaixa.setText("");
-         jTextFieldValorTotal.setText("");
-         
-         CaixaDAO caixaDAO = new CaixaDAO();
-         System.out.println(caixaModel);
-         //caixaDAO.SalvarCaixa(caixaModel);
+        // PEGA A DATA PARA FAZER O FECHAMENTO
         
+        Date data = new Date(System.currentTimeMillis());
+        SimpleDateFormat formatarDate = new SimpleDateFormat("dd/MM/yyyy");
+        String date = formatarDate.format(data);
+        
+        // System.out.print(formatarDate.format(data));
+        caixaModel.setDataAbertura(data);
+        caixaModel.setDataFechamento(data); /// Mesma data 
+        
+        valorInicial = Integer.parseInt(jTextFieldValorInicialCaixa.getText());
+        caixaModel.setValorInicial(valorInicial);
+        
+        valorTotal = Integer.parseInt(jTextFieldValorInicialCaixa.getText());
+        caixaModel.setValorTotal(valorTotal);
+
+        valorTotal = valorTotal + valorInicial;
+
+        caixaModel.setValorTotal(valorTotal);
+
+        jTextFieldDataFechamento.setText("");
+        //    jTextFieldResponsavelCaixa.setText("");
+        jTextFieldValorInicialCaixa.setText("");
+        jTextFieldValorTotal.setText("");
+        
+        caixaDAO.atualizar(caixaModel);
+        
+        
+        
+        System.out.println(caixaModel);
+       
+
     }//GEN-LAST:event_jButtonFecharCaixaActionPerformed
 
     private void jTextFieldValorTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValorTotalActionPerformed

@@ -178,6 +178,10 @@ public FuncionarioModel() {
         return "FuncionarioModel{" + "codFuncionario=" + codFuncionario + ", cpf=" + cpf + ", nome=" + nome + ", endereco=" + endereco + ", email=" + email + ", telefone=" + telefone + ", senha=" + senha + ", cargo=" + cargo + ", compras=" + compras + ", caixas=" + caixas + ", produtos=" + produtos + '}';
     }
 
+    public boolean contains(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 
 

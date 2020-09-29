@@ -39,9 +39,6 @@ public class CaixaView extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextFieldResponsavelCaixa = new javax.swing.JTextField();
-        jButtonBuscarResponsavel = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldValorInicialCaixa = new javax.swing.JTextField();
         jButtonAbrirCaixa = new javax.swing.JButton();
@@ -61,10 +58,6 @@ public class CaixaView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Controle de caixa");
-
-        jLabel1.setText("Responsável");
-
-        jButtonBuscarResponsavel.setText("Buscar");
 
         jLabel3.setText("Valor Inicial");
 
@@ -87,10 +80,22 @@ public class CaixaView extends javax.swing.JFrame {
 
         jLabel5.setText("Valor Total");
 
+        jTextFieldValorTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldValorTotalActionPerformed(evt);
+            }
+        });
+
         jButtonFecharCaixa.setText("Fechar Caixa");
         jButtonFecharCaixa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFecharCaixaActionPerformed(evt);
+            }
+        });
+
+        jTextFieldDataFechamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldDataFechamentoActionPerformed(evt);
             }
         });
 
@@ -108,37 +113,28 @@ public class CaixaView extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(6, 6, 6)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel6))
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextFieldDataFechamento, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldValorTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldDataFechamento)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel1))
+                                .addGap(7, 7, 7)
+                                .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldResponsavelCaixa)
-                                    .addComponent(jTextFieldValorInicialCaixa, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
+                                .addComponent(jTextFieldValorInicialCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButtonAbrirCaixa, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                                    .addComponent(jButtonBuscarResponsavel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jButtonAbrirCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextFieldResponsavelCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonBuscarResponsavel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextFieldValorInicialCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,10 +191,10 @@ public class CaixaView extends javax.swing.JFrame {
 
          caixaModel.setValorTotal(0);
          
-         jTextFieldResponsavelCaixa.setText("");
+     //    jTextFieldResponsavelCaixa.setText("");
          jTextFieldValorInicialCaixa.setText("");
          
-         jTextFieldResponsavelCaixa.requestFocus();
+//         jTextFieldResponsavelCaixa.requestFocus();
          //dataRodapePrincipal.setText(formatoData.format(datadosistema));
          DefaultTableModel val = (DefaultTableModel)jTableTabelaCaixa.getModel();
          
@@ -234,7 +230,7 @@ public class CaixaView extends javax.swing.JFrame {
          caixaModel.setValorTotal(valorTotal);
          
          jTextFieldDataFechamento.setText("");
-         jTextFieldResponsavelCaixa.setText("");
+     //    jTextFieldResponsavelCaixa.setText("");
          jTextFieldValorInicialCaixa.setText("");
          jTextFieldValorTotal.setText("");
          
@@ -243,6 +239,14 @@ public class CaixaView extends javax.swing.JFrame {
          //caixaDAO.SalvarCaixa(caixaModel);
         
     }//GEN-LAST:event_jButtonFecharCaixaActionPerformed
+
+    private void jTextFieldValorTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValorTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldValorTotalActionPerformed
+
+    private void jTextFieldDataFechamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDataFechamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldDataFechamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,10 +285,8 @@ public class CaixaView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAbrirCaixa;
-    private javax.swing.JButton jButtonBuscarResponsavel;
     private javax.swing.JButton jButtonFecharCaixa;
     private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -294,7 +296,6 @@ public class CaixaView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableTabelaCaixa;
     private javax.swing.JTextField jTextFieldDataFechamento;
-    private javax.swing.JTextField jTextFieldResponsavelCaixa;
     private javax.swing.JTextField jTextFieldValorInicialCaixa;
     private javax.swing.JTextField jTextFieldValorTotal;
     // End of variables declaration//GEN-END:variables

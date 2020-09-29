@@ -8,6 +8,8 @@ package View;
 
 import Model.CaixaModel;
 import static Model.CaixaModel_.dataAbertura;
+import Model.FuncionarioModel;
+import Model.PrincipalModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -21,7 +23,7 @@ import javax.swing.Timer;
  * @author pedro
  */
 public class PrincipalView extends javax.swing.JFrame {
-
+    private String value; 
     /**
      * Creates new form PrincipalView
      */
@@ -31,13 +33,20 @@ public class PrincipalView extends javax.swing.JFrame {
     
     
     
-    public JLabel getDataRodapePrincipal() {
-        return dataRodapePrincipal;
+    public PrincipalView(String value) {
+        this.value = value;
     }
 
-    public void setDataRodapePrincipal(JLabel dataRodapePrincipal) {
-        this.dataRodapePrincipal = dataRodapePrincipal;
+    public String getValue() {
+        return value;
     }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+    
+    
+    
     
     
 
@@ -453,6 +462,13 @@ public class PrincipalView extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // Quando a janela for aberta insere a data e hora no rodapé
         // DATA 
+       // FuncionarioModel p = new FuncionarioModel();
+        PrincipalView a = new PrincipalView();
+        
+        String nomeRodape = a.getValue();
+        
+        
+        NomeRodape.setText(nomeRodape);
         
          Date datadosistema = new Date();
          SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");

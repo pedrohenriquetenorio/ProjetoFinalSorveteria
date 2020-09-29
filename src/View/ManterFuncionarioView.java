@@ -297,17 +297,13 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
 //    }
     
     private void atualizaTabelaFuncionario(List<FuncionarioModel> funcionarios) {
-        System.out.println("ANTES DO IF");
+      
         DefaultTableModel val = (DefaultTableModel) jTableFuncionarioTabela.getModel();
         val.setNumRows(0); // excluir os registros que estão na JTable
         listaDeFuncionario = funcionarios;
-        
-        System.out.println("ANTES DO IF");
-        
+  
         if (jTableFuncionarioTabela != null) {
-            
-            System.out.println("DEPOIS DO IF");
-            
+
             for (FuncionarioModel funcionario : listaDeFuncionario) {
                 String codigo = Integer.toString(funcionario.getCodFuncionario());
                 val.addRow(new Object[]{codigo, funcionario.getCpf(), funcionario.getNome(), funcionario.getEmail(), funcionario.getSenha(),funcionario.getCargo(), funcionario.getEndereco(), funcionario.getTelefone()});
@@ -337,7 +333,7 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
          // Atribui valores vazios 
          // jTextFieldCodFuncionario.setText("");
          jTextFieldFuncionarioCPF.setText("");
-          jTextFieldFuncionarioNome.setText("");
+         jTextFieldFuncionarioNome.setText("");
          jTextFieldFuncionarioEmail.setText(""); 
          jTextFieldFuncionarioEndereco.setText("");
          jTextFieldFuncionarioSenha.setText("");
@@ -434,12 +430,11 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // Preenche a tabela ao iniciar o FuncionarioView
         FuncionarioDAO a = new FuncionarioDAO();
-        System.out.println("CHAMDA");
         List<FuncionarioModel> b = a.findAll();
         atualizaTabelaFuncionario(b);
-        System.out.println(b);
     }//GEN-LAST:event_formWindowOpened
 
+    
     /**
      * @param args the command line arguments
      */

@@ -262,7 +262,6 @@ public class ManterFornecedorView extends javax.swing.JFrame {
         }
     }
     
-    
      private String tabelaDados() {
         int tamanhos = jTableFornecedorTabela.getRowCount();
         int i;
@@ -351,10 +350,7 @@ public class ManterFornecedorView extends javax.swing.JFrame {
 //        jTextFieldFornecedorEmail.setText(fornecedor.getEmail());
 //        jTextFieldFornecedorNome.setText(fornecedor.getNomeFantasia());
 //        jTextFieldFornecedorTelefone.setText(fornecedor.getTelefone());        
-            
-            
-        
-       
+
     }//GEN-LAST:event_jButtonFornecedorPesquisarActionPerformed
 
     private void jButtonFornecedorAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFornecedorAlterarActionPerformed
@@ -375,8 +371,6 @@ public class ManterFornecedorView extends javax.swing.JFrame {
         ///Atualizar TABELA 
          // jTextFieldCodigoFornecedor.setText((String) jTableFornecedorTabela.getValueAt(variavel, 0));
         
-          
-          
     }//GEN-LAST:event_jButtonFornecedorAlterarActionPerformed
 
     private void jButtonFornecedorExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFornecedorExcluirActionPerformed

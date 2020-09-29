@@ -5,15 +5,19 @@
  */
 package View;
 
+import Model.DAO.FuncionarioDAO;
+import Model.FuncionarioModel;
+import Model.PrincipalModel;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
+import View.PrincipalView;
 /**
  *
  * @author pedro
  */
 public class LoginView extends javax.swing.JFrame {
-
+private List <FuncionarioModel> listaDeFuncionario;
     /**
      * Creates new form Login
      */
@@ -166,28 +170,48 @@ public class LoginView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jExitLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jExitLoginActionPerformed
-            System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_jExitLoginActionPerformed
 
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
- 
-        if("admin".equals(jLoginCPF.getText()) && "admin".equals(jLoginSenha.getText())){
-          new PrincipalView().setVisible(true);
-          dispose();
-        }else if(!"admin".equals(jLoginCPF.getText()) && !"admin".equals(jLoginSenha.getText())){
-            JOptionPane.showMessageDialog(rootPane, "CPF e Senha invalidos!");
-        }else if(!"admin".equals(jLoginCPF.getText())){
-            JOptionPane.showMessageDialog(rootPane, "CPF invalido!");    
-        }else if(!"admin".equals(jLoginSenha.getText())){
-            JOptionPane.showMessageDialog(rootPane, "Senha invalida!");
-        }
-         
+        // Buscar Administrador no banco 
+        int i = 0, cpfInt = 0, cpfINt = 0;
+        String nome;
+        PrincipalView principal = new PrincipalView();
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        FuncionarioModel funcionarioModel = new FuncionarioModel();
+
+
+        List<FuncionarioModel> funcionarios = funcionarioDAO.findAll();
+        
+        listaDeFuncionario = funcionarios;
+
+        do {
+                FuncionarioModel val = funcionarios.get(i);
+                
+                System.out.println(val.toString());
+                System.out.println(val);
+                
+                funcionarioModel = val;
+
+                String cpf = funcionarioModel.getCpf();
+                 nome = funcionarioModel.getNome();
+                cpfInt = Integer.parseInt(cpf);
+                cpfINt = Integer.parseInt (jLoginCPF.getText());
+                
+                }while(cpfInt != cpfINt);
+                
+               // Verificação System.out.println("CPF String"  + "CPF INT" + cpfInt + " CPF LOGIN" + cpfINt );
+              
+              principal.setValue(nome);
+               new PrincipalView().setVisible(true);
+        
+        
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     private void jLoginCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoginCPFActionPerformed
         // TODO add your handling code here:
-        
-        
+
     }//GEN-LAST:event_jLoginCPFActionPerformed
 
     private void jLoginSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoginSenhaActionPerformed
@@ -228,7 +252,7 @@ public class LoginView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LoginView().setVisible(true);
-              
+
             }
         });
     }

@@ -50,6 +50,11 @@ public class CompraView extends javax.swing.JFrame {
         jLabel1.setText("Produto");
 
         jButtonCompraProduto.setText("Buscar");
+        jButtonCompraProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCompraProdutoActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Fornecedor");
 
@@ -168,6 +173,14 @@ public class CompraView extends javax.swing.JFrame {
     private void jButtonCompraFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCompraFornecedorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCompraFornecedorActionPerformed
+
+    private void jButtonCompraProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCompraProdutoActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        
+    }//GEN-LAST:event_jButtonCompraProdutoActionPerformed
 
     /**
      * @param args the command line arguments

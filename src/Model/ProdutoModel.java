@@ -47,6 +47,7 @@ private String quantidadeProduto;
 //Produto -> Compra       
 @OneToMany(mappedBy = "produto")
 private List<CompraModel> compra;
+
 //Produto -> Funcionario
 @ManyToOne
 @JoinColumn(name = "funcionario_cod_funcionario", nullable = false) // 

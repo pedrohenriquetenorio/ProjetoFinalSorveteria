@@ -390,8 +390,6 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
             return "nenhum dado";
     }
     
-    
-    
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
       
         
@@ -421,7 +419,6 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
              //Remove linha do Banco
              excluirFuncionarioDAO.excluirFuncionario(valorInteiro);
              
-           
          }
          
          

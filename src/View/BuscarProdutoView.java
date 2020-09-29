@@ -143,8 +143,8 @@ public class BuscarProdutoView extends javax.swing.JFrame {
         System.out.println("CHAMDA");
         List<ProdutoModel> b = a.findAll();
         atualizaTabelaProduto(b);
-        
-        System.out.println(b);
+  
+  //      System.out.println(b);
     }//GEN-LAST:event_formWindowOpened
 
     /**

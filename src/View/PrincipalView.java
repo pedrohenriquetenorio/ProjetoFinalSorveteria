@@ -492,8 +492,10 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void BotaoVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoVendaActionPerformed
-        // TODO add your handling code here:
-        new VendaView().setVisible(true);
+      
+        VendaView venda = new VendaView();
+        venda.setVisible(true);// TODO add your handling code here:
+       
     }//GEN-LAST:event_BotaoVendaActionPerformed
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed

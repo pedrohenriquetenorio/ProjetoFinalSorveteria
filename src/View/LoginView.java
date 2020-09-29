@@ -7,6 +7,7 @@ package View;
 
 import Model.DAO.FuncionarioDAO;
 import Model.FuncionarioModel;
+import Model.LoginModel;
 import Model.PrincipalModel;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -180,7 +181,7 @@ private List <FuncionarioModel> listaDeFuncionario;
         PrincipalView principal = new PrincipalView();
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         FuncionarioModel funcionarioModel = new FuncionarioModel();
-
+        LoginModel nomeLogin = new LoginModel();
 
         List<FuncionarioModel> funcionarios = funcionarioDAO.findAll();
         
@@ -189,8 +190,8 @@ private List <FuncionarioModel> listaDeFuncionario;
         do {
                 FuncionarioModel val = funcionarios.get(i);
                 
-                System.out.println(val.toString());
-                System.out.println(val);
+              //  System.out.println(val.toString());
+               // System.out.println(val);
                 
                 funcionarioModel = val;
 
@@ -202,9 +203,9 @@ private List <FuncionarioModel> listaDeFuncionario;
                 }while(cpfInt != cpfINt);
                 
                // Verificação System.out.println("CPF String"  + "CPF INT" + cpfInt + " CPF LOGIN" + cpfINt );
-              
+              nomeLogin.setNomeLogin(nome);
               principal.setValue(nome);
-               new PrincipalView().setVisible(true);
+              new PrincipalView().setVisible(true);
         
         
     }//GEN-LAST:event_jButtonEntrarActionPerformed

@@ -35,9 +35,10 @@ public class LoginModel {
     public LoginModel() {
     }
 
-    public LoginModel(int idLogin, String nomeLogin) {
+    public LoginModel(int idLogin, String nomeLogin, FuncionarioModel funcionario) {
         this.idLogin = idLogin;
         this.nomeLogin = nomeLogin;
+        this.funcionario = funcionario;
     }
 
     public int getIdLogin() {
@@ -55,6 +56,15 @@ public class LoginModel {
     public void setNomeLogin(String nomeLogin) {
         this.nomeLogin = nomeLogin;
     }
+
+    public FuncionarioModel getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(FuncionarioModel funcionario) {
+        this.funcionario = funcionario;
+    }
+
 
     @Override
     public String toString() {

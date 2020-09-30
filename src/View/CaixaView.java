@@ -9,9 +9,11 @@ import Model.CaixaModel;
 import Model.DAO.CaixaDAO;
 import Model.DAO.FuncionarioDAO;
 import Model.DAO.LoginDAO;
+import Model.FuncionarioModel;
 import Model.LoginModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,7 +22,9 @@ import javax.swing.table.DefaultTableModel;
  * @author pedro
  */
 public class CaixaView extends javax.swing.JFrame {
-
+    
+   private List <LoginModel> listaLogin;
+   private List<FuncionarioModel> listaFuncionario;
     /**
      * Creates new form CaixaView
      */
@@ -178,7 +182,10 @@ public class CaixaView extends javax.swing.JFrame {
 
     private void jButtonAbrirCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirCaixaActionPerformed
         // pega a data
-        String Responsavel, dataA, dataF, valorI, valorT, estado;
+        String dataA, dataF, valorI, valorT, estado;
+        int tamanho, tamanhoFuncionario;
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        FuncionarioModel funcionarioModel = new FuncionarioModel();
         CaixaModel caixaModel = new CaixaModel();
         CaixaDAO caixaDAO = new CaixaDAO();
         LoginModel loginModel = new LoginModel();
@@ -189,7 +196,7 @@ public class CaixaView extends javax.swing.JFrame {
         Date data = new Date(System.currentTimeMillis());
         SimpleDateFormat formatarDate = new SimpleDateFormat("dd/MM/yyyy");
         String date = formatarDate.format(data);
-        
+        System.out.println("DATA:" + date);
 //        checagem da data
 //        System.out.print(formatarDate.format(data));
         
@@ -203,30 +210,67 @@ public class CaixaView extends javax.swing.JFrame {
         caixaModel.setValorTotal(0);
         
         caixaModel.setEstado("Aberto");
+        System.out.println("CAIXA MODEL" + caixaModel);
         
+         listaLogin = loginDAO.findAll();
+         System.out.println("CAIXA MOssssassasaDEL" + listaLogin);
+        
+//recebe a ultima posição da lista de login
+
+        
+        tamanho = listaLogin.size();    
+        loginModel = listaLogin.get(tamanho-1);
+        System.out.println("a vale" + loginModel);
+        
+        //objeto recebe conteudo de lista 
+        
+        //recebe nome que esta no model
+        System.out.println("TESTE");
+        System.out.println("LOGIN MODELaaaaaaaaaaaa" + loginModel);
+        System.out.println("TESTE2");
+        
+        String nome = loginModel.getNomeLogin();
+        int indice = loginModel.getIdLogin();
+        funcionarioModel = loginModel.getFuncionario();
+        System.out.println("indice"+indice + "Funcionario"+ funcionarioModel);
+        //listaFuncionario = funcionarioDAO.findAll();
+        //tamanhoFuncionario = listaFuncionario.size();
+        
+        int cod = funcionarioModel.getCodFuncionario();
+        
+        
+        
+        listaFuncionario = funcionarioDAO.buscarFuncionario(cod);
+        
+        System.out.println(listaFuncionario);
+        
+        FuncionarioModel funcionario = listaFuncionario.get(cod);
+        funcionarioModel = funcionario;
+        
+        System.out.println("FUNCIONARIO MODELbbbbbbbbb" + funcionarioModel +" "+ funcionario );
+        
+      //  int cod = funcionarioModel.getCodFuncionario();
+        String codFuncionario = Integer.toString(cod);
+       
+        System.out.println("codFuncionariocccccccccc" + codFuncionario);
         //String a = loginDAO.buscarLogin();
         //SALVA CAIXA NO BANCO
+     //   caixaModel.setFuncionario(funcionario.getCodFuncionario());
         caixaDAO.SalvarCaixa(caixaModel);
-        
-        
         
         //LIMPA O VALOR INICIAL
         jTextFieldValorInicialCaixa.setText("");
         
-        
-        
         //ATRIBUI VALORES (OBJETO) NA TABELA
         DefaultTableModel val = (DefaultTableModel) jTableTabelaCaixa.getModel();
-        
-        
-        
-        Responsavel = "Funcionario"; // valor temporario
+       
+        //Responsavel = "Funcionario"; // valor temporario
         dataA = Double.toString(caixaModel.getValorInicial());
         dataF = Double.toString(caixaModel.getValorTotal());
         valorI = date;
         valorT = date;
         estado = "Aberto";
-        val.addRow(new String[]{Responsavel, dataA, dataF, valorI, valorT, estado});
+        val.addRow(new String[]{codFuncionario, dataA, dataF, valorI, valorT, estado});
       
     }//GEN-LAST:event_jButtonAbrirCaixaActionPerformed
 
@@ -268,7 +312,17 @@ public class CaixaView extends javax.swing.JFrame {
        
 
     }//GEN-LAST:event_jButtonFecharCaixaActionPerformed
-
+    
+     private void UltimoLogin(List<LoginModel> logins) {
+      
+        listaLogin = logins;
+        
+        
+        
+            
+    }
+    
+    
     private void jTextFieldValorTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValorTotalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldValorTotalActionPerformed

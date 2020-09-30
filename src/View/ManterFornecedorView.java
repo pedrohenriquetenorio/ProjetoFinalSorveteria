@@ -323,33 +323,33 @@ public class ManterFornecedorView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonFornecedorSalvarActionPerformed
 
     private void jButtonFornecedorPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFornecedorPesquisarActionPerformed
-//         DefaultTableModel val = (DefaultTableModel)jTableFornecedorTabela.getModel();
-//        int valorId;
-//       
-//        FornecedorModel fornecedor = new FornecedorModel();
-//        FornecedorDAO fornecedorDAO = new FornecedorDAO();
-//        
-//        //valor = Integer.parseInt(jTextIdFuncionario.getText());
-//        
-//        valorId = Integer.parseInt(jTextFieldPesquisaFornecedor.getText()); 
-//        fornecedor = fornecedorDAO.Buscar(valorId);
-//        
-//        //*teste de retorno*
-//        System.out.println("Teste de parametro : "+valorId);
-//        
-//        String dados = (String) jTableFornecedorTabela.getValueAt(valorId, 0);
-//        
-//        
-//        System.out.println(dados);
-//        //valorId = Integer.parseInt(dados);
-//        jTableFornecedorTabela.addRowSelectionInterval(valorId,0);
-//        
-//        String codigoString = Integer.toString(fornecedor.getCodFornecedor());
-//        jTextFieldCodigoFornecedor.setText(codigoString);
-//        jTextFieldFornecedorCNPJ.setText(fornecedor.getCnpj());
-//        jTextFieldFornecedorEmail.setText(fornecedor.getEmail());
-//        jTextFieldFornecedorNome.setText(fornecedor.getNomeFantasia());
-//        jTextFieldFornecedorTelefone.setText(fornecedor.getTelefone());        
+         DefaultTableModel val = (DefaultTableModel)jTableFornecedorTabela.getModel();
+        int valorId;
+       
+        FornecedorModel fornecedor = new FornecedorModel();
+        FornecedorDAO fornecedorDAO = new FornecedorDAO();
+        
+        //valor = Integer.parseInt(jTextIdFuncionario.getText());
+        
+        valorId = Integer.parseInt(jTextFieldPesquisaFornecedor.getText()); 
+        fornecedor = fornecedorDAO.Buscar(valorId);
+        
+        //*teste de retorno*
+        System.out.println("Teste de parametro : "+valorId);
+        
+        String dados = (String) jTableFornecedorTabela.getValueAt(valorId, 0);
+        
+        
+        System.out.println(dados);
+        //valorId = Integer.parseInt(dados);
+        jTableFornecedorTabela.addRowSelectionInterval(valorId,0);
+        
+        String codigoString = Integer.toString(fornecedor.getCodFornecedor());
+        jTextFieldCodigoFornecedor.setText(codigoString);
+        jTextFieldFornecedorCNPJ.setText(fornecedor.getCnpj());
+        jTextFieldFornecedorEmail.setText(fornecedor.getEmail());
+        jTextFieldFornecedorNome.setText(fornecedor.getNomeFantasia());
+        jTextFieldFornecedorTelefone.setText(fornecedor.getTelefone());        
 
     }//GEN-LAST:event_jButtonFornecedorPesquisarActionPerformed
 

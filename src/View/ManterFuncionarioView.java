@@ -301,7 +301,7 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
         DefaultTableModel val = (DefaultTableModel) jTableFuncionarioTabela.getModel();
         val.setNumRows(0); // excluir os registros que estão na JTable
         listaDeFuncionario = funcionarios;
-  
+        
         if (jTableFuncionarioTabela != null) {
 
             for (FuncionarioModel funcionario : listaDeFuncionario) {

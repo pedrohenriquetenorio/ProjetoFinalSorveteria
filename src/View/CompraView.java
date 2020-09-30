@@ -168,17 +168,22 @@ public class CompraView extends javax.swing.JFrame {
 
     private void jTextFieldCompraQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCompraQuantidadeActionPerformed
         // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_jTextFieldCompraQuantidadeActionPerformed
 
     private void jButtonCompraFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCompraFornecedorActionPerformed
         // TODO add your handling code here:
+        BuscarFornecedor fornecedor = new BuscarFornecedor();
+        fornecedor.setVisible(true);
+        
     }//GEN-LAST:event_jButtonCompraFornecedorActionPerformed
 
     private void jButtonCompraProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCompraProdutoActionPerformed
         // TODO add your handling code here:
         
-        
-        
+        BuscarProdutoView produto = new  BuscarProdutoView();
+        produto.setVisible(true);
         
     }//GEN-LAST:event_jButtonCompraProdutoActionPerformed
 

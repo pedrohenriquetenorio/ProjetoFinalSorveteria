@@ -86,7 +86,7 @@ public class FuncionarioDAO {
         }
 
         // Busca por Caixa no banco de dados
-        public List<FuncionarioModel> buscarFuncionario(int codigo) {
+        public FuncionarioModel buscarFuncionario(int codigo) {
 
             FuncionarioModel recebe = null;
             EntityManager em = getEm();
@@ -101,7 +101,7 @@ public class FuncionarioDAO {
 //            TypedQuery<Pessoa> query = em.createQuery("Select p FROM Pessoa p WHERE p.nome LIKE :nome", Pessoa.class);
 //            query.setParameter("nome", "%" + nome + "%");
           
-            return (List<FuncionarioModel>) recebe;
+            return recebe;
 //           
         }
         

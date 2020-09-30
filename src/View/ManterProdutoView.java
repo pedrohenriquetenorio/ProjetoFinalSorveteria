@@ -265,6 +265,9 @@ public class ManterProdutoView extends javax.swing.JFrame {
         //nomeLogin = usuarioLogin.getNomeLogin();
         System.out.println(funcionario.toString());
         
+        
+        
+        
 //        //ObjetoProduto.setFuncionario(); // passar um funcionario tipo Funcionario para o Produto
 //        ObjetoProduto.setFuncionario(funcionario);
 //        ObjetoProduto.setPrecoProduto(jTextFieldPrecoProduto.getText());

@@ -102,6 +102,8 @@ public class ManterFornecedorView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableFornecedorTabela);
         if (jTableFornecedorTabela.getColumnModel().getColumnCount() > 0) {
+            jTableFornecedorTabela.getColumnModel().getColumn(0).setMinWidth(40);
+            jTableFornecedorTabela.getColumnModel().getColumn(0).setMaxWidth(40);
             jTableFornecedorTabela.getColumnModel().getColumn(4).setMinWidth(60);
             jTableFornecedorTabela.getColumnModel().getColumn(4).setMaxWidth(60);
         }
@@ -200,7 +202,7 @@ public class ManterFornecedorView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldFornecedorEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addGap(18, 36, Short.MAX_VALUE)
+                .addGap(18, 45, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonFornecedorPesquisar)
                     .addComponent(jTextFieldPesquisaFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -222,7 +224,7 @@ public class ManterFornecedorView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(14, 14, 14))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,7 +249,7 @@ public class ManterFornecedorView extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jTextFieldFornecedorNomeActionPerformed
-    private void atualizaTabelaFuncionario(List<FornecedorModel> fornecedores) {
+    private void atualizaTabelaFornecedor(List<FornecedorModel> fornecedores) {
      
         DefaultTableModel val = (DefaultTableModel) jTableFornecedorTabela.getModel();
         val.setNumRows(0); // excluir os registros que estão na JTable
@@ -345,7 +347,7 @@ public class ManterFornecedorView extends javax.swing.JFrame {
         jTableFornecedorTabela.addRowSelectionInterval(valorId,0);
         
         String codigoString = Integer.toString(fornecedor.getCodFornecedor());
-        jTextFieldCodigoFornecedor.setText(codigoString);
+     //   jTextFieldCodigoFornecedor.setText(fornecedor.getCodFornecedor());
         jTextFieldFornecedorCNPJ.setText(fornecedor.getCnpj());
         jTextFieldFornecedorEmail.setText(fornecedor.getEmail());
         jTextFieldFornecedorNome.setText(fornecedor.getNomeFantasia());
@@ -355,7 +357,8 @@ public class ManterFornecedorView extends javax.swing.JFrame {
 
     private void jButtonFornecedorAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFornecedorAlterarActionPerformed
         int variavel;
-         
+       
+        
         FornecedorModel fornecedor = new FornecedorModel();
       //  int codFornecedor = Integer.parseInt(jTextFieldCodigoFornecedor.getText());
      //   fornecedor.setCodFornecedor(codFornecedor);
@@ -399,6 +402,11 @@ public class ManterFornecedorView extends javax.swing.JFrame {
     
     
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        
+        // Preenche a tabela ao iniciar o FuncionarioView
+        FornecedorDAO fornecedorDAO = new FornecedorDAO();
+        List<FornecedorModel> b = fornecedorDAO.findAll();
+        atualizaTabelaFornecedor(b);
         
     }//GEN-LAST:event_formWindowOpened
 

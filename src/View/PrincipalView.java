@@ -409,7 +409,9 @@ public class PrincipalView extends javax.swing.JFrame {
         financeiro.setVisible(true);
 
     }//GEN-LAST:event_jMenuItemFinanceiroActionPerformed
-
+    
+    
+    
     private void jMenuItemCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCaixaActionPerformed
         
        CaixaView caixa = new CaixaView();

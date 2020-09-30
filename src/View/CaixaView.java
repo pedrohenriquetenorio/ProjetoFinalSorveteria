@@ -222,7 +222,7 @@ public class CaixaView extends javax.swing.JFrame {
         loginModel = listaLogin.get(tamanho-1);
         System.out.println("a vale" + loginModel);
         
-        //objeto recebe conteudo de lista 
+       
         
         //recebe nome que esta no model
         System.out.println("TESTE");
@@ -238,20 +238,22 @@ public class CaixaView extends javax.swing.JFrame {
         
         int cod = funcionarioModel.getCodFuncionario();
         
+        System.out.println("COOOOOOD"+ cod);
         
+        funcionarioModel = funcionarioDAO.buscarFuncionario(cod);
         
-        listaFuncionario = funcionarioDAO.buscarFuncionario(cod);
+        System.out.println("AMENO aAAAAAAA "+ funcionarioModel);
         
-        System.out.println(listaFuncionario);
+        // funcionario = funcionarioModel.getCodFuncionario();
+      
         
-        FuncionarioModel funcionario = listaFuncionario.get(cod);
-        funcionarioModel = funcionario;
+     //   funcionarioModel = funcionario;
         
-        System.out.println("FUNCIONARIO MODELbbbbbbbbb" + funcionarioModel +" "+ funcionario );
         
       //  int cod = funcionarioModel.getCodFuncionario();
-        String codFuncionario = Integer.toString(cod);
-       
+        String codFuncionario = Integer.toString(funcionarioModel.getCodFuncionario());
+        
+            
         System.out.println("codFuncionariocccccccccc" + codFuncionario);
         //String a = loginDAO.buscarLogin();
         //SALVA CAIXA NO BANCO

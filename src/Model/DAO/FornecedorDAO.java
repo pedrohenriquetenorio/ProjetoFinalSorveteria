@@ -6,9 +6,12 @@
 package Model.DAO;
 
 import Model.FornecedorModel;
+import Model.FuncionarioModel;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaQuery;
 
 /**
  *
@@ -22,7 +25,17 @@ public class FornecedorDAO {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjetoSorveteria2PU");
             return emf.createEntityManager();
         }
-
+        
+         public List<FornecedorModel> findAll() {
+        
+            EntityManager em = getEm();
+            CriteriaQuery criteriaQuery = em.getCriteriaBuilder().createQuery();
+            criteriaQuery.select(criteriaQuery.from(FuncionarioModel.class));
+        
+            return em.createQuery(criteriaQuery).getResultList();
+    
+        }
+        
         public FornecedorModel Salvar(FornecedorModel fornecedor) {
 
             EntityManager em = getEm();
@@ -66,9 +79,6 @@ public class FornecedorDAO {
             return recebe;
         }
 
-    public void Salvar(int variavel2) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     }
 

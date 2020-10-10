@@ -197,8 +197,6 @@ public class CaixaView extends javax.swing.JFrame {
         SimpleDateFormat formatarDate = new SimpleDateFormat("dd/MM/yyyy");
         String date = formatarDate.format(data);
         System.out.println("DATA:" + date);
-//        checagem da data
-//        System.out.print(formatarDate.format(data));
         
         caixaModel.setDataAbertura(data);
         caixaModel.setDataFechamento(data); /// Mesma data 

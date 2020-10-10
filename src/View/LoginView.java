@@ -198,10 +198,8 @@ private List <FuncionarioModel> listaDeFuncionario;
                 // tem que arrumar esta passand cpf e não o nome, esta como nome la no model
                 
                 loginModel.setNomeLogin(cpf);
-                loginDAO.salvarLogin(loginModel);
-                
-                
-                 
+                loginDAO.salvarLogin(loginModel);     
+           
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     private void jLoginCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoginCPFActionPerformed

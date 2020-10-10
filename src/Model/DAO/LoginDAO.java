@@ -42,6 +42,7 @@ public class LoginDAO {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             
             CriteriaQuery<LoginModel> criteriaQuery = criteriaBuilder.createQuery(LoginModel.class);
+            
             //criteria.select(criteria.from(EmailDomainTrust.class));
             Root<LoginModel> root = criteriaQuery.from(LoginModel.class);
             

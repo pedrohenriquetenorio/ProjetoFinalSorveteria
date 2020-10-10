@@ -41,10 +41,7 @@ public class CompraModel {
    
     @Column (name = "quantidade_compra", length = 45, nullable = false)
     private int quantidadeCompra;
-    
-    //Observação, verificar se fornecedor_cod_fornecedor vai funcionar, pois
-    // não sei se tem que estar igual ao banco ou igual a entidade Fornecedor
-    
+
     // Compra -> Fornecedor
     @ManyToOne
     @JoinColumn (name = "fornecedor_cod_fornecedor") // se der erro é isso aq // caso der erro tentar colocar cod_fornecedor

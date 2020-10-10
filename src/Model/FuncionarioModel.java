@@ -35,25 +35,25 @@ public class FuncionarioModel {
 @Column (name = "cod_Funcionario", nullable = false)
 private int codFuncionario;
 
-@Column (name = "cpf", length = 45, nullable = false)
+@Column (name = "cpf", length = 14, nullable = false)
 private String cpf;
 
-@Column (name = "nome", length = 45, nullable = false)
+@Column (name = "nome", length = 50, nullable = false)
 private String nome; 
 
-@Column (name = "endereco", length = 45, nullable = false)
+@Column (name = "endereco", length = 80, nullable = false)
 private String endereco;
 
-@Column (name = "email", length = 45, nullable = false)
+@Column (name = "email", length = 50, nullable = false)
 private String email;
 
-@Column (name = "telefone", length = 45, nullable = false)
+@Column (name = "telefone", length = 13, nullable = false)
 private String telefone;
 
-@Column (name = "senha", length = 45, nullable = false)
+@Column (name = "senha", length = 20, nullable = false)
 private String senha;
 
-@Column (name = "cargo", length = 45, nullable = false)
+@Column (name = "cargo", length = 20, nullable = false)
 private String cargo;
 
 

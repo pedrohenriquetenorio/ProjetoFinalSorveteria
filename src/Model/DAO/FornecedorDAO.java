@@ -45,12 +45,12 @@ public class FornecedorDAO {
             em.close();
             return fornecedor;
         }
-        // porque coloquei caixa?????????
-        public void atualizar(FornecedorModel caixa) {
+        
+        public void atualizar(FornecedorModel dados) {
 
             EntityManager em = getEm();
             em.getTransaction().begin();
-            em.merge(caixa);
+            em.merge(dados);
             em.getTransaction().commit();
             em.close();
         }

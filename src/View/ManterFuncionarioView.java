@@ -5,7 +5,8 @@
  */
 package View;
 
-
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 import View.AlterarFuncionarioView;
 import Model.DAO.FuncionarioDAO;
 import Model.FuncionarioModel;
@@ -20,6 +21,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
+import javax.swing.text.PlainDocument;
 
 /**
  *
@@ -36,6 +38,33 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
     public ManterFuncionarioView() {
         initComponents();
         
+    }
+    
+    public class ApenasLetras extends PlainDocument {
+
+        private static final long serialVersionUID = 1L;
+
+        // Sempre usar verbo no infinitivo para criar metodos
+        public void insertString(int offs, String str,
+                javax.swing.text.AttributeSet a) throws BadLocationException {
+
+            // normalmente apenas uma letra é inserida por vez,
+            // mas fazendo assim também previne caso o usuário
+            // cole algum texto
+            for (int i = 0; i < str.length(); i++) // Se não for uma letra retorna zero
+            {
+                if (!Character.isLetter(str.charAt(i))) {
+                    return;
+                }
+            }
+
+            // Aceita apena 1 letra digitada por vez
+            int tamMax = 1;
+            if ((getLength() + str.length()) <= tamMax) {
+                super.insertString(offs, str, a);
+            }
+
+        }
     }
     
 //    private void formatarCampo(){
@@ -144,7 +173,6 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jTextFieldFuncionarioCPF.setText("   .   .   -  ");
         jTextFieldFuncionarioCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldFuncionarioCPFActionPerformed(evt);
@@ -374,40 +402,48 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
          ObjetoFuncionario.setTelefone(jTextFieldFuncionarioTelefone.getText());
          ObjetoFuncionario.setCargo(cargo);
          
+         jTextFieldFuncionarioNome.setDocument(new ApenasLetras());
+         
+         
         //Validação de cadastro 
          validacaoCPF = ObjetoFuncionario.getCpf();
          
          //Passa o paremetro para verificar o cpf
          String botaoCadastro = "botaocadastro";
-         tabelaDados(botaoCadastro);
+         String mensagem = tabelaDados(botaoCadastro);
+
+         if (!"Usuario já cadastrado no sistema!".equals(mensagem)) {
+
+            ObjetoFuncionarioDAO.salvarFuncionario(ObjetoFuncionario);
+
+            // Atribui valores vazios 
+            // jTextFieldCodFuncionario.setText("");
+            jTextFieldFuncionarioCPF.setText("");
+            jTextFieldFuncionarioNome.setText("");
+            jTextFieldFuncionarioEmail.setText("");
+            jTextFieldFuncionarioEndereco.setText("");
+            jTextFieldFuncionarioSenha.setText("");
+            jTextFieldFuncionarioTelefone.setText("");
+            jTextFieldFuncionarioCPF.requestFocus();
+
+            DefaultTableModel val = (DefaultTableModel) jTableFuncionarioTabela.getModel();
+
+            String codigo = Integer.toString(ObjetoFuncionario.getCodFuncionario());
+            cpf = ObjetoFuncionario.getCpf();
+            nome = ObjetoFuncionario.getNome();
+            email = ObjetoFuncionario.getEmail();
+            telefone = ObjetoFuncionario.getTelefone();
+            senha = ObjetoFuncionario.getSenha();
+            endereco = ObjetoFuncionario.getEndereco();
+            cargo = ObjetoFuncionario.getCargo();
+
+            //adiciona na jTable os valores 
+            val.addRow(new String[]{codigo, cpf, nome, email, senha, cargo, endereco, telefone});
+        }else{
          
-        // Salva no banco validar isso 
-         ObjetoFuncionarioDAO.salvarFuncionario(ObjetoFuncionario);
-         
-         // Atribui valores vazios 
-         // jTextFieldCodFuncionario.setText("");
-         jTextFieldFuncionarioCPF.setText("");
-         jTextFieldFuncionarioNome.setText("");
-         jTextFieldFuncionarioEmail.setText(""); 
-         jTextFieldFuncionarioEndereco.setText("");
-         jTextFieldFuncionarioSenha.setText("");
-         jTextFieldFuncionarioTelefone.setText("");
-         jTextFieldFuncionarioCPF.requestFocus();
+         JOptionPane.showMessageDialog(null, mensagem);
         
-        DefaultTableModel val = (DefaultTableModel)jTableFuncionarioTabela.getModel();
-        
-        String codigo = Integer.toString(ObjetoFuncionario.getCodFuncionario());
-        cpf = ObjetoFuncionario.getCpf();
-        nome = ObjetoFuncionario.getNome();
-        email = ObjetoFuncionario.getEmail();
-        telefone = ObjetoFuncionario.getTelefone();
-        senha = ObjetoFuncionario.getSenha();
-        endereco = ObjetoFuncionario.getEndereco();
-        cargo = ObjetoFuncionario.getCargo();
-        
-        //adiciona na jTable os valores 
-        val.addRow(new String[] {codigo, cpf, nome, email, senha, cargo, endereco, telefone});
-             
+        }  
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
@@ -434,13 +470,14 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
 
                 }
             }
+            
         } else if ("botaocadastro".equals(pesquisa)) {
             for (i = 0; i < tamanhos; i++) {
 
                 String retornaCpf = (String) jTableFuncionarioTabela.getValueAt(i, 1);
-                jTableFuncionarioTabela.setRowSelectionInterval(i, i);
-                if (retornaCpf.equals(jTextFieldFuncionarioPesquisar.getText())) {
-
+                if (retornaCpf.equals(jTextFieldFuncionarioCPF.getText())) {
+                    
+                    retornaCpf = "Usuario já cadastrado no sistema!";
                     return retornaCpf;
 
                 }

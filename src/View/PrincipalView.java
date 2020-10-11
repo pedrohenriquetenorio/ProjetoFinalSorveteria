@@ -21,6 +21,7 @@ import javax.swing.Timer;
  * @author pedro
  */
 public class PrincipalView extends javax.swing.JFrame {
+    String nomeDoRodape;
     private LoginView value; 
     /**
      * Creates new form PrincipalView
@@ -43,10 +44,7 @@ public class PrincipalView extends javax.swing.JFrame {
         
     }
     
-    //pega o nome do Funcionario que fez login e atribui para o rodapé
-    public void LoginNomeFuncionario(String nome){
-        NomeRodape.setText(nome);
-    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -138,7 +136,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(NomeRodape, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(NomeRodape, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -159,12 +157,15 @@ public class PrincipalView extends javax.swing.JFrame {
                     .addGroup(RodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(HoraRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(dataRodapePrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(NomeRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(RodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CaixaStatus)
                             .addComponent(jLabel1)
                             .addComponent(jLabel7))))
                 .addContainerGap())
+            .addGroup(RodapeLayout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addComponent(NomeRodape, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         BotaoVenda.setText("Venda");
@@ -216,7 +217,7 @@ public class PrincipalView extends javax.swing.JFrame {
                     .addComponent(BotaoCadastrarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -459,37 +460,12 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemFornecedoresActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // Quando a janela for aberta insere a data e hora no rodapé
-        // DATA 
-       // FuncionarioModel p = new FuncionarioModel();
-       //String NomeRodape;
-       PrincipalModel nomeRodape = new PrincipalModel();
-        
-      //  String nomeRodape = a.getValue();
-        
-      
-        if(nomeRodape.getNomefuncionario() == null){
-        
-            NomeRodape.setText("Funcionario");
-        
-        }else{
-            
-            NomeRodape.setText(nomeRodape.getNomefuncionario());
-        
-        }
-        
-      //  System.out.println(PrincipalNomeRodape(nome));
-        System.out.println("AAAAAAAADADW" +  nomeRodape.getNomefuncionario());
-        
-        
-        FuncionarioModel funcionario = new FuncionarioModel();
-       // NomeRodape.setText(nomeRodape);
-        System.out.println(funcionario);
-    //    NomeRodape.setText(funcionario.getNome());
+       
+         
          Date datadosistema = new Date();
          SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
          dataRodapePrincipal.setText(formatoData.format(datadosistema));
-         
+         NomeRodape.setText(nomeDoRodape);
         // HORA 
         Timer timer = new Timer(1000, new hora());
         timer.start();
@@ -559,7 +535,14 @@ public class PrincipalView extends javax.swing.JFrame {
       
         
     }
-    
+    //pega o nome do Funcionario que fez login e atribui para o rodapé
+    public void LoginNomeFuncionario(String nome){
+        
+        
+        NomeRodape.setText(nome);
+        nomeDoRodape = nome;
+        System.out.println(nomeDoRodape);
+    }
     
     
   
@@ -603,6 +586,7 @@ public class PrincipalView extends javax.swing.JFrame {
     class hora implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
+        
     Calendar now = Calendar.getInstance();
     HoraRodape.setText(String.format("%1$tH:%1$tM:%1$tS", now));
     

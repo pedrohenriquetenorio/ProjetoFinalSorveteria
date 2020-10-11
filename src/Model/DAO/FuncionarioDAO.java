@@ -22,9 +22,6 @@ import javax.swing.JOptionPane;
  */
 public class FuncionarioDAO {
        
-    
-        
-
         public EntityManager getEm() {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjetoSorveteria2PU");
             return emf.createEntityManager();

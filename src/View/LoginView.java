@@ -172,21 +172,13 @@ private List <FuncionarioModel> listaDeFuncionarios;
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
         // Buscar Administrador no banco 
         int i = 0, cpfInt = 0, senhaInt=0, verificacaoCPF = 0, verificacaoSenha=0, cod;
-        String nome, cpf, senha, a ,b ;
+        String nome ;
         PrincipalView principal = new PrincipalView();
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         FuncionarioModel funcionarioModel = new FuncionarioModel();
         LoginModel loginModel = new LoginModel();
         LoginDAO loginDAO = new LoginDAO();
-        
-        //Busca todos os funcionarios ao iniciar o login
-       // List<FuncionarioModel> funcionarios = funcionarioDAO.findAll();
-        
-        // Lista de funcionarios
-        //  listaDeFuncionario = funcionarios;
-        
-        
-        
+       
         // Recebe valor do jTextField, para comparar depois
           String recebecpf = jLoginCPF.getText().trim();
           String recebesenha = jLoginSenha.getText().trim();
@@ -201,19 +193,15 @@ private List <FuncionarioModel> listaDeFuncionarios;
             System.out.println("recebe CPF"+recebecpf +  "RECEBE SENHA" + recebesenha);
             funcionarioModel = val;
 
-            cpf = funcionarioModel.getCpf();
-            nome = funcionarioModel.getNome();
-            senha = funcionarioModel.getSenha();
-            cod = funcionarioModel.getCodFuncionario();
-            // recebendo 
-            //cpfInt = Integer.parseInt(cpf);
-            //senhaInt = Integer.parseInt(senha);
+//            cpf = funcionarioModel.getCpf();
+//            nome = funcionarioModel.getNome();
+//            senha = funcionarioModel.getSenha();
+//            cod = funcionarioModel.getCodFuncionario();
            
-            String aa = funcionarioModel.getCpf();
-            String bb = funcionarioModel.getSenha();
-             System.out.println(aa +""+bb);
-            
-            if(funcionarioModel.getCpf().equals(aa) && funcionarioModel.getSenha().equals(bb)){
+            String funcionarioCPF = funcionarioModel.getCpf();
+            String funcionarioSenha = funcionarioModel.getSenha();
+            nome = funcionarioModel.getNome();
+            if(funcionarioModel.getCpf().equals(funcionarioCPF) && funcionarioModel.getSenha().equals(funcionarioSenha)){
                         
                         loginModel.setNomeLogin(nome);
                         loginModel.setFuncionario(funcionarioModel);
@@ -222,66 +210,17 @@ private List <FuncionarioModel> listaDeFuncionarios;
                         principal.LoginNomeFuncionario(nome);
                          
                         new PrincipalView().setVisible(true);
-                        
+                         dispose();
                         
                     }else{
-                    System.out.println("error !");
+                
+                     JOptionPane.showMessageDialog(null," incorretos");
+                     System.out.println("error !");
                 }
             i++;
 
         } while (cpfInt != verificacaoCPF);
-                
-                
-//                for(FuncionarioModel funcionario : listaDeFuncionarios){
-//                    
-//                    System.out.println("funcionario dados!!!" + funcionario);
-//                    funcionarioModel = funcionario;
-//                    cpf = funcionarioModel.getCpf();
-//                    nome = funcionarioModel.getNome();
-//                    senha = funcionarioModel.getSenha();
-//                    
-//                    if(funcionarioModel.getCpf().equals(recebecpf) && (funcionarioModel.getSenha().equals(recebesenha))){
-//                        loginModel.setNomeLogin(cpf);
-//                        loginDAO.salvarLogin(loginModel);
-//                        
-//                        principal.LoginNomeFuncionario(nome);
-//                         
-//                        new PrincipalView().setVisible(true);
-//                        
-//                        
-//                    }
-//                    
-//                }
-        
-        
-        
-        
-        
-        
-//                if(!jLoginCPF.getText().equals(cpf) && !jLoginSenha.getText().equals(senha)){
-//                 
-//                    JOptionPane.showMessageDialog(null, "usuario ou senha incorretos");
-//                    
-//                }
-                    
-        
-        
-        
-////                System.out.println("Dentro de Login" + nome);
-////                funcionarioModel.setNome(nome);
-////               // Verificação System.out.println("CPF String"  + "CPF INT" + cpfInt + " CPF LOGIN" + cpfINt );
-////               // nomeLogin.setNomeLogin(nome);
-////                principal.PrincipalNomeRodape(nome);
-////               
-////                //principal.setValue(nome);
-////                new PrincipalView().setVisible(true);
-////                // tem que arrumar esta passand cpf e não o nome, esta como nome la no model
-////                
-////                loginModel.setNomeLogin(cpf);
-////                loginDAO.salvarLogin(loginModel);     
-                
-                
-                
+          
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     private void jLoginSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoginSenhaActionPerformed

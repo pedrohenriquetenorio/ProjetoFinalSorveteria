@@ -313,9 +313,9 @@ public class AlterarFuncionarioView extends javax.swing.JFrame{
          // A VALIDAÇÃO TEM QUE SER AQ !!!
          // se os campos não estiverem devidamente preenchidos não consegue finalizar a alteração
          
-        dialogResult = JOptionPane.showConfirmDialog (null, "Quer realmente alterar o cadastro? ","Warning", dialogButton);
+        dialogResult = JOptionPane.showConfirmDialog (null, "Quer alterar o cadastro? ","Warning", dialogButton);
         if(dialogResult == JOptionPane.YES_OPTION){
-           // funcionarioDAO.atualizarFuncionario(funcionarioModel);
+            funcionarioDAO.atualizarFuncionario(funcionarioModel);
            JOptionPane.showMessageDialog(null, "Alteração concluida!");
            funcionarioView.setVisible(true);
             dispose();
@@ -325,72 +325,8 @@ public class AlterarFuncionarioView extends javax.swing.JFrame{
         }
         System.out.println("Construtor do funcionario model" + funcionarioModel);
         
-        
     }//GEN-LAST:event_AlterarActionPerformed
 
-//    public void ValidaTamanhoCaractere(){
-//        
-//        String cpf, telefone;
-//        int tamanhoCpf = 14, tamanhoTelefone = 13;
-//        String totalCpf = "", totalTelefone = "", tamanho;
-//        cpf = jTextFieldFuncionarioCPF.getText();
-//        telefone = jTextFieldFuncionarioTelefone.getText();
-//       
-//        if (cpf.length() == tamanhoCpf){
-//            jTextFieldFuncionarioCPF.setBorder(new LineBorder(Color.RED, 1, false));
-//            totalCpf = "";
-//        }else{
-//            jTextFieldFuncionarioCPF.setBorder(new LineBorder(Color.RED, 1, true));
-//            totalCpf = "CPF";
-//        }
-//        
-//        if (telefone.length() == tamanhoTelefone){
-//           jTextFieldFuncionarioTelefone.setBorder(new LineBorder(Color.RED, 1, false));
-//            totalTelefone = "";
-//        }else{
-//            jTextFieldFuncionarioTelefone.setBorder(new LineBorder(Color.RED, 1, true));
-//            totalTelefone = "Telefone";
-//        }
-//        
-//        if("CPF".equals(totalCpf)){
-//            
-//           tamanho =  "Preencha o campo" + totalCpf;
-//           JOptionPane.showMessageDialog(null, tamanho);
-//           
-//        }else if ("Telefone".equals(totalTelefone)){
-//            
-//           tamanho =  "Preencha o campo" + totalTelefone;
-//           JOptionPane.showMessageDialog(null, tamanho);
-//           
-//        }else if( "CPF".equals(totalCpf) && "CPF".equals(totalTelefone) ){    
-//        tamanho =  "Preencha o campo" + totalCpf + " " +totalTelefone + "completamente!";
-//        JOptionPane.showMessageDialog(null, tamanho);
-//        }else{
-//            
-//            JOptionPane.showMessageDialog(null, "Alteração realizada!");
-//                
-//        }
-//        
-//        
-//        
-//        
-////        if(tamanhos != total){
-////            
-////            jTextFieldFuncionarioCPF.setBorder(new LineBorder(Color.GRAY, 1, true));
-////            jTextFieldFuncionarioTelefone.setBorder(new LineBorder(Color.GRAY, 1, true));
-////           
-////        }
-//        
-//        
-//        
-//        
-//        
-//        
-//       
-//    }
-    
-    
-    
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         // TODO add your handling code here:
        

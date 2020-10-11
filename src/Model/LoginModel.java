@@ -28,6 +28,7 @@ public class LoginModel {
     
     @Column (name = "nome_login", length = 40, nullable = false)
     private String nomeLogin;
+    
     @OneToOne
     @JoinColumn(name = "funcionario_cod_funcionario")
     private FuncionarioModel funcionario;

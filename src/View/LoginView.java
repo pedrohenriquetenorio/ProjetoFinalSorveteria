@@ -19,14 +19,15 @@ import View.PrincipalView;
  * @author pedro
  */
 public class LoginView extends javax.swing.JFrame {
-private List <FuncionarioModel> listaDeFuncionario;
+private List <FuncionarioModel> listaDeFuncionarios;
     /**
      * Creates new form Login
      */
     public LoginView() {
         initComponents();
     }
-
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,27 +46,25 @@ private List <FuncionarioModel> listaDeFuncionario;
             e.printStackTrace();
         }
         jLabel3 = new javax.swing.JLabel();
-        jLoginCPF = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jExitLogin = new javax.swing.JButton();
         jButtonEntrar = new javax.swing.JButton();
         jLoginSenha = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
+        jLoginCPF = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
         setUndecorated(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("CPF");
-
-        jLoginCPF.setBackground(new java.awt.Color(255, 255, 255));
-        jLoginCPF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jLoginCPFActionPerformed(evt);
-            }
-        });
 
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Senha");
@@ -94,6 +93,17 @@ private List <FuncionarioModel> listaDeFuncionario;
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Login");
 
+        try {
+            jLoginCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jLoginCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jLoginCPFActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -105,15 +115,15 @@ private List <FuncionarioModel> listaDeFuncionario;
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLoginSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLoginSenha)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
-                            .addComponent(jLoginCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jExitLogin)
                                 .addGap(96, 96, 96)
-                                .addComponent(jButtonEntrar)))))
+                                .addComponent(jButtonEntrar))
+                            .addComponent(jLoginCPF))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -123,8 +133,8 @@ private List <FuncionarioModel> listaDeFuncionario;
                 .addComponent(jLabel2)
                 .addGap(24, 24, 24)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLoginCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jLoginCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -161,55 +171,135 @@ private List <FuncionarioModel> listaDeFuncionario;
 
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
         // Buscar Administrador no banco 
-        int i = 0, cpfInt = 0, cpfINt = 0;
-        String nome, cpf;
+        int i = 0, cpfInt = 0, senhaInt=0, verificacaoCPF = 0, verificacaoSenha=0, cod;
+        String nome, cpf, senha, a ,b ;
         PrincipalView principal = new PrincipalView();
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         FuncionarioModel funcionarioModel = new FuncionarioModel();
         LoginModel loginModel = new LoginModel();
         LoginDAO loginDAO = new LoginDAO();
-        List<FuncionarioModel> funcionarios = funcionarioDAO.findAll();
         
-        listaDeFuncionario = funcionarios;
-
+        //Busca todos os funcionarios ao iniciar o login
+       // List<FuncionarioModel> funcionarios = funcionarioDAO.findAll();
+        
+        // Lista de funcionarios
+        //  listaDeFuncionario = funcionarios;
+        
+        
+        
+        // Recebe valor do jTextField, para comparar depois
+          String recebecpf = jLoginCPF.getText().trim();
+          String recebesenha = jLoginSenha.getText().trim();
+        
+        //pega um usuario no banco e salva no model de funcionario
         do {
-                FuncionarioModel val = funcionarios.get(i);
-                
-              //  System.out.println(val.toString());
-               // System.out.println(val);
-                
-                funcionarioModel = val;
-                
-                cpf = funcionarioModel.getCpf();
-                nome = funcionarioModel.getNome();
-                cpfInt = Integer.parseInt(cpf);
-                cpfINt = Integer.parseInt (jLoginCPF.getText());
-                
-                }while(cpfInt != cpfINt);
-        
-                System.out.println("Dentro de Login" + nome);
-                funcionarioModel.setNome(nome);
-               // Verificação System.out.println("CPF String"  + "CPF INT" + cpfInt + " CPF LOGIN" + cpfINt );
-               // nomeLogin.setNomeLogin(nome);
-                principal.PrincipalNomeRodape(nome);
-               
-                //principal.setValue(nome);
-                new PrincipalView().setVisible(true);
-                // tem que arrumar esta passand cpf e não o nome, esta como nome la no model
-                
-                loginModel.setNomeLogin(cpf);
-                loginDAO.salvarLogin(loginModel);     
+
+            FuncionarioModel val = listaDeFuncionarios.get(i);
+
+            //  System.out.println(val.toString());
+            System.out.println("verificação de Variavel LOGIN SHOW S:"+val);
+            System.out.println("recebe CPF"+recebecpf +  "RECEBE SENHA" + recebesenha);
+            funcionarioModel = val;
+
+            cpf = funcionarioModel.getCpf();
+            nome = funcionarioModel.getNome();
+            senha = funcionarioModel.getSenha();
+            cod = funcionarioModel.getCodFuncionario();
+            // recebendo 
+            //cpfInt = Integer.parseInt(cpf);
+            //senhaInt = Integer.parseInt(senha);
            
+            String aa = funcionarioModel.getCpf();
+            String bb = funcionarioModel.getSenha();
+             System.out.println(aa +""+bb);
+            
+            if(funcionarioModel.getCpf().equals(aa) && funcionarioModel.getSenha().equals(bb)){
+                        
+                        loginModel.setNomeLogin(nome);
+                        loginModel.setFuncionario(funcionarioModel);
+                        loginDAO.salvarLogin(loginModel);
+                        
+                        principal.LoginNomeFuncionario(nome);
+                         
+                        new PrincipalView().setVisible(true);
+                        
+                        
+                    }else{
+                    System.out.println("error !");
+                }
+            i++;
+
+        } while (cpfInt != verificacaoCPF);
+                
+                
+//                for(FuncionarioModel funcionario : listaDeFuncionarios){
+//                    
+//                    System.out.println("funcionario dados!!!" + funcionario);
+//                    funcionarioModel = funcionario;
+//                    cpf = funcionarioModel.getCpf();
+//                    nome = funcionarioModel.getNome();
+//                    senha = funcionarioModel.getSenha();
+//                    
+//                    if(funcionarioModel.getCpf().equals(recebecpf) && (funcionarioModel.getSenha().equals(recebesenha))){
+//                        loginModel.setNomeLogin(cpf);
+//                        loginDAO.salvarLogin(loginModel);
+//                        
+//                        principal.LoginNomeFuncionario(nome);
+//                         
+//                        new PrincipalView().setVisible(true);
+//                        
+//                        
+//                    }
+//                    
+//                }
+        
+        
+        
+        
+        
+        
+//                if(!jLoginCPF.getText().equals(cpf) && !jLoginSenha.getText().equals(senha)){
+//                 
+//                    JOptionPane.showMessageDialog(null, "usuario ou senha incorretos");
+//                    
+//                }
+                    
+        
+        
+        
+////                System.out.println("Dentro de Login" + nome);
+////                funcionarioModel.setNome(nome);
+////               // Verificação System.out.println("CPF String"  + "CPF INT" + cpfInt + " CPF LOGIN" + cpfINt );
+////               // nomeLogin.setNomeLogin(nome);
+////                principal.PrincipalNomeRodape(nome);
+////               
+////                //principal.setValue(nome);
+////                new PrincipalView().setVisible(true);
+////                // tem que arrumar esta passand cpf e não o nome, esta como nome la no model
+////                
+////                loginModel.setNomeLogin(cpf);
+////                loginDAO.salvarLogin(loginModel);     
+                
+                
+                
     }//GEN-LAST:event_jButtonEntrarActionPerformed
-
-    private void jLoginCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoginCPFActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jLoginCPFActionPerformed
 
     private void jLoginSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoginSenhaActionPerformed
         // TODO add your handling code here:
+     
     }//GEN-LAST:event_jLoginSenhaActionPerformed
+
+    private void jLoginCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoginCPFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLoginCPFActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+      
+         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+         listaDeFuncionarios = funcionarioDAO.findAll();
+         System.out.println(listaDeFuncionarios);
+        
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -257,7 +347,7 @@ private List <FuncionarioModel> listaDeFuncionario;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jLoginCPF;
+    private javax.swing.JFormattedTextField jLoginCPF;
     private javax.swing.JPasswordField jLoginSenha;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

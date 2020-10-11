@@ -20,6 +20,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.AttributeSet;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.PlainDocument;
 
@@ -28,45 +29,64 @@ import javax.swing.text.PlainDocument;
  * @author pedro
  */
 public class ManterFuncionarioView extends javax.swing.JFrame {
-   
-    private List <FuncionarioModel> listaDeFuncionario;
+
+    private List<FuncionarioModel> listaDeFuncionario;
     /**
      * Creates new form ManterFuncionarioView
      */
     private FuncionarioDAO funcionarioDAO;
-    
+
     public ManterFuncionarioView() {
         initComponents();
+
+        // Inicializa as validações de letras e numeros
         
+        //Apenas Letras
+        jTextFieldFuncionarioNome.setDocument(new ApenasLetras());
+        jTextFieldFuncionarioPesquisar.setDocument(new ApenasLetras());
+        
+        //Limite de Caracteres 
+        jTextFieldFuncionarioEmail.setDocument(new Limite(50));
+        jTextFieldFuncionarioEndereco.setDocument(new Limite(80));
+        
+        jTextFieldFuncionarioSenha.setDocument(new Limite(20));
+        
+
     }
-    
-    public class ApenasLetras extends PlainDocument {
 
-        private static final long serialVersionUID = 1L;
+    public final class ApenasLetras extends PlainDocument {
 
-        // Sempre usar verbo no infinitivo para criar metodos
-        public void insertString(int offs, String str,
-                javax.swing.text.AttributeSet a) throws BadLocationException {
+        @Override
+        public void insertString(int offset, String str, javax.swing.text.AttributeSet attr)
+                throws BadLocationException {
 
-            // normalmente apenas uma letra é inserida por vez,
-            // mas fazendo assim também previne caso o usuário
-            // cole algum texto
-            for (int i = 0; i < str.length(); i++) // Se não for uma letra retorna zero
-            {
-                if (!Character.isLetter(str.charAt(i))) {
-                    return;
-                }
-            }
-
-            // Aceita apena 1 letra digitada por vez
-            int tamMax = 1;
-            if ((getLength() + str.length()) <= tamMax) {
-                super.insertString(offs, str, a);
-            }
-
+            super.insertString(offset, str.replaceAll("[^a-z|^A-Z|^ ]", ""), attr);// ACEITA SOMENTE LETRAS
+            jTextFieldFuncionarioNome.setDocument(new Limite(50));
+            jTextFieldFuncionarioPesquisar.setDocument(new Limite(50));
         }
+
     }
     
+   public final class Limite extends PlainDocument {
+
+    private final int limite;
+
+  public Limite(int limite) {
+    this.limite = limite;
+  }
+
+  @Override
+  public void insertString(int offs, String str, AttributeSet a)
+      throws BadLocationException {
+    if (str == null)
+      return;
+
+    if ((getLength() + str.length()) <= limite) {
+      super.insertString(offs, str, a);
+    }
+  }
+}
+
 //    private void formatarCampo(){
 //        try {
 //            MaskFormatter mask = new MaskFormatter("####-####");
@@ -79,7 +99,6 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
 //        }
 //    
 //    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -351,7 +370,8 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
 
     private void jTextFieldFuncionarioNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFuncionarioNomeActionPerformed
         // TODO add your handling code here:
-        
+
+
     }//GEN-LAST:event_jTextFieldFuncionarioNomeActionPerformed
 
 //    private int linhaPesquisa() {
@@ -368,51 +388,46 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
 //        }
 //        return -1;
 //    }
-    
     private void atualizaTabelaFuncionario(List<FuncionarioModel> funcionarios) {
-      
+
         DefaultTableModel val = (DefaultTableModel) jTableFuncionarioTabela.getModel();
         val.setNumRows(0); // excluir os registros que estão na JTable
         listaDeFuncionario = funcionarios;
-        
+
         if (jTableFuncionarioTabela != null) {
 
             for (FuncionarioModel funcionario : listaDeFuncionario) {
                 String codigo = Integer.toString(funcionario.getCodFuncionario());
-                val.addRow(new Object[]{codigo, funcionario.getCpf(), funcionario.getNome(), funcionario.getEmail(), funcionario.getSenha(),funcionario.getCargo(), funcionario.getEndereco(), funcionario.getTelefone()});
-           }
+                val.addRow(new Object[]{codigo, funcionario.getCpf(), funcionario.getNome(), funcionario.getEmail(), funcionario.getSenha(), funcionario.getCargo(), funcionario.getEndereco(), funcionario.getTelefone()});
+            }
         }
     }
-    
-    
+
+
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
-         String cpf, email, endereco, nome, senha, telefone, cargo, validacaoCPF;
-        
-         FuncionarioModel ObjetoFuncionario = new FuncionarioModel();
-         FuncionarioDAO ObjetoFuncionarioDAO = new FuncionarioDAO();
-         
-         
-         cargo = (String) jComboBoxFuncionarioCargo.getSelectedItem();
-         ObjetoFuncionario.setCpf(jTextFieldFuncionarioCPF.getText());
-         ObjetoFuncionario.setEmail(jTextFieldFuncionarioEmail.getText());
-         ObjetoFuncionario.setEndereco(jTextFieldFuncionarioEndereco.getText());
-         ObjetoFuncionario.setNome(jTextFieldFuncionarioNome.getText());
-         ObjetoFuncionario.setSenha(jTextFieldFuncionarioSenha.getText());
-         ObjetoFuncionario.setTelefone(jTextFieldFuncionarioTelefone.getText());
-         ObjetoFuncionario.setCargo(cargo);
-         
-         jTextFieldFuncionarioNome.setDocument(new ApenasLetras());
-         
-         
-        //Validação de cadastro 
-         validacaoCPF = ObjetoFuncionario.getCpf();
-         
-         //Passa o paremetro para verificar o cpf
-         String botaoCadastro = "botaocadastro";
-         String mensagem = tabelaDados(botaoCadastro);
+        String cpf, email, endereco, nome, senha, telefone, cargo, validacaoCPF;
 
-         if (!"Usuario já cadastrado no sistema!".equals(mensagem)) {
+        FuncionarioModel ObjetoFuncionario = new FuncionarioModel();
+        FuncionarioDAO ObjetoFuncionarioDAO = new FuncionarioDAO();
+
+        cargo = (String) jComboBoxFuncionarioCargo.getSelectedItem();
+        ObjetoFuncionario.setCpf(jTextFieldFuncionarioCPF.getText());
+        ObjetoFuncionario.setEmail(jTextFieldFuncionarioEmail.getText());
+        ObjetoFuncionario.setEndereco(jTextFieldFuncionarioEndereco.getText());
+        ObjetoFuncionario.setNome(jTextFieldFuncionarioNome.getText());
+        ObjetoFuncionario.setSenha(jTextFieldFuncionarioSenha.getText());
+        ObjetoFuncionario.setTelefone(jTextFieldFuncionarioTelefone.getText());
+        ObjetoFuncionario.setCargo(cargo);
+
+        //Validação de cadastro 
+        validacaoCPF = ObjetoFuncionario.getCpf();
+        
+        //Passa o paremetro para verificar o cpf
+        String botaoCadastro = "botaocadastro";
+        String mensagem = tabelaDados(botaoCadastro);
+
+        if (!"Usuario já cadastrado no sistema!".equals(mensagem)) {
 
             ObjetoFuncionarioDAO.salvarFuncionario(ObjetoFuncionario);
 
@@ -439,20 +454,19 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
 
             //adiciona na jTable os valores 
             val.addRow(new String[]{codigo, cpf, nome, email, senha, cargo, endereco, telefone});
-        }else{
-         
-         JOptionPane.showMessageDialog(null, mensagem);
-        
-        }  
+        } else {
+
+            JOptionPane.showMessageDialog(null, mensagem);
+
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
-            String botaopesquisa = "botaopesquisa";
-               tabelaDados(botaopesquisa);
+        String botaopesquisa = "botaopesquisa";
+        tabelaDados(botaopesquisa);
 
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
-    
-    
+
     private String tabelaDados(String pesquisa) {
         int tamanhos = jTableFuncionarioTabela.getRowCount();
         int i;
@@ -470,13 +484,13 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
 
                 }
             }
-            
+
         } else if ("botaocadastro".equals(pesquisa)) {
             for (i = 0; i < tamanhos; i++) {
 
                 String retornaCpf = (String) jTableFuncionarioTabela.getValueAt(i, 1);
                 if (retornaCpf.equals(jTextFieldFuncionarioCPF.getText())) {
-                    
+
                     retornaCpf = "Usuario já cadastrado no sistema!";
                     return retornaCpf;
 
@@ -485,7 +499,7 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
         }
         return "nenhum dado";
     }
-    
+
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
         int item;
         String cpf, nome, email, senha, endereco, telefone, cargo, id;
@@ -494,12 +508,11 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
         if (item == -1) {
             JOptionPane.showMessageDialog(null, "Selecione um campo na tabela");
         } else {
-            
+
             AlterarFuncionarioView altera = new AlterarFuncionarioView();
             FuncionarioModel ObjetoFuncionario = new FuncionarioModel();
-           
+
             // pegando valores de um item da tabela para fazer a alteração!
-            
             id = (String) jTableFuncionarioTabela.getValueAt(item, 0);
             int inteiro = Integer.valueOf(id);
             cpf = (String) jTableFuncionarioTabela.getValueAt(item, 1);
@@ -509,8 +522,7 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
             cargo = (String) jTableFuncionarioTabela.getValueAt(item, 5);
             endereco = (String) jTableFuncionarioTabela.getValueAt(item, 6);
             telefone = (String) jTableFuncionarioTabela.getValueAt(item, 7);
-            
-            
+
             ObjetoFuncionario.setCpf(cpf);
             ObjetoFuncionario.setEmail(email);
             ObjetoFuncionario.setEndereco(endereco);
@@ -520,39 +532,46 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
             //ObjetoFuncionario.setCargo(cargos);
             ObjetoFuncionario.setCargo(cargo);
             ObjetoFuncionario.setCodFuncionario(inteiro);
-            
+
             altera.dadosFuncionario(id, cpf, nome, endereco, email, telefone, cargo, senha);
-            
+
             altera.setVisible(true);
             dispose();
-        
+
         }
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-         int valorInteiro;
-         int variavel;
-         DefaultTableModel val = (DefaultTableModel)jTableFuncionarioTabela.getModel();
-        
-         FuncionarioDAO excluirFuncionarioDAO = new FuncionarioDAO();
-       
-         variavel = jTableFuncionarioTabela.getSelectedRow();
-         // pega o conteudo 
-         String a = (String) jTableFuncionarioTabela.getValueAt(variavel, 0);
+        int valorInteiro;
+        int variavel;
+        DefaultTableModel val = (DefaultTableModel) jTableFuncionarioTabela.getModel();
 
-         // se retornar -1 quer dizer que esta vazio, e variavel é o campo
-         if(variavel == -1){
-             JOptionPane.showMessageDialog(null, "Selecione um campo na tabela");
-         }else{
+        FuncionarioDAO excluirFuncionarioDAO = new FuncionarioDAO();
+
+        variavel = jTableFuncionarioTabela.getSelectedRow();
+        // pega o conteudo 
+        String a = (String) jTableFuncionarioTabela.getValueAt(variavel, 0);
+
+        // se retornar -1 quer dizer que esta vazio, e variavel é o campo
+        if (variavel == -1) {
+            JOptionPane.showMessageDialog(null, "Selecione um campo na tabela");
+        } else {
             valorInteiro = Integer.valueOf(a);
-             //Remove linha da Tabela 
-             val.removeRow(jTableFuncionarioTabela.getSelectedRow());
-             //Remove linha do Banco
-             excluirFuncionarioDAO.excluirFuncionario(valorInteiro);
-             
-         }
-         
-         
+
+            try {
+                //Remove linha do Banco    
+                excluirFuncionarioDAO.excluirFuncionario(valorInteiro);
+                //Remove linha da Tabela 
+                val.removeRow(jTableFuncionarioTabela.getSelectedRow());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "não pode excluir este funcionário");
+            } finally {
+                JOptionPane.showMessageDialog(null, "Funcionário Excluido!");
+            }
+
+        }
+
+
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -570,7 +589,6 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTextFieldFuncionarioEnderecoActionPerformed
 
-    
     /**
      * @param args the command line arguments
      */

@@ -43,7 +43,10 @@ public class PrincipalView extends javax.swing.JFrame {
         
     }
     
-    
+    //pega o nome do Funcionario que fez login e atribui para o rodapé
+    public void LoginNomeFuncionario(String nome){
+        NomeRodape.setText(nome);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

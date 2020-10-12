@@ -6,6 +6,7 @@
 package View;
 
 
+import Fabrica.RelatorioCompra;
 import Model.FuncionarioModel;
 import Model.PrincipalModel;
 import java.awt.event.ActionEvent;
@@ -73,8 +74,9 @@ public class PrincipalView extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuVenda = new javax.swing.JMenu();
         jMenuItemVenda = new javax.swing.JMenuItem();
-        jMenuFinanceiro = new javax.swing.JMenu();
+        jMenuRelatorioCompra = new javax.swing.JMenu();
         jMenuItemFinanceiro = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jControleCaixa = new javax.swing.JMenu();
         jMenuItemCaixa = new javax.swing.JMenuItem();
         jMenuFornecedores = new javax.swing.JMenu();
@@ -261,18 +263,21 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuVenda);
 
-        jMenuFinanceiro.setForeground(new java.awt.Color(0, 0, 0));
-        jMenuFinanceiro.setText("Financeiro");
+        jMenuRelatorioCompra.setForeground(new java.awt.Color(0, 0, 0));
+        jMenuRelatorioCompra.setText("Financeiro");
 
-        jMenuItemFinanceiro.setText("Financeiro");
+        jMenuItemFinanceiro.setText("Relatório de Compras");
         jMenuItemFinanceiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemFinanceiroActionPerformed(evt);
             }
         });
-        jMenuFinanceiro.add(jMenuItemFinanceiro);
+        jMenuRelatorioCompra.add(jMenuItemFinanceiro);
 
-        jMenuBar1.add(jMenuFinanceiro);
+        jMenuItem3.setText("jMenuItem3");
+        jMenuRelatorioCompra.add(jMenuItem3);
+
+        jMenuBar1.add(jMenuRelatorioCompra);
 
         jControleCaixa.setForeground(new java.awt.Color(0, 0, 0));
         jControleCaixa.setText("Controle Caixa");
@@ -408,6 +413,9 @@ public class PrincipalView extends javax.swing.JFrame {
 
     private void jMenuItemFinanceiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFinanceiroActionPerformed
         // TODO add your handling code here:
+        //String relatorio = "";
+        //new RelatorioCompra().gerar(em, relatorio, "");
+        
 
         FinanceiroView financeiro = new FinanceiroView();
         financeiro.setVisible(true);
@@ -567,17 +575,18 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu jMenuFinanceiro;
     private javax.swing.JMenu jMenuFornecedores;
     private javax.swing.JMenu jMenuFuncionario;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItemCaixa;
     private javax.swing.JMenuItem jMenuItemFinanceiro;
     private javax.swing.JMenuItem jMenuItemFornecedores;
     private javax.swing.JMenuItem jMenuItemFuncionario;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenuItem jMenuItemVenda;
+    private javax.swing.JMenu jMenuRelatorioCompra;
     private javax.swing.JMenu jMenuSair;
     private javax.swing.JMenu jMenuVenda;
     private javax.swing.JPanel jPanel1;

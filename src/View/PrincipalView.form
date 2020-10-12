@@ -30,7 +30,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenuFinanceiro">
+        <Menu class="javax.swing.JMenu" name="jMenuRelatorioCompra">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -40,11 +40,16 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemFinanceiro">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Financeiro"/>
+                <Property name="text" type="java.lang.String" value="Relat&#xf3;rio de Compras"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemFinanceiroActionPerformed"/>
               </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jMenuItem3"/>
+              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
